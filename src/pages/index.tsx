@@ -112,23 +112,12 @@ const Home = (): JSX.Element => {
           <div className="animate-slide-up bg-white rounded-lg">
             <ProductSuggestions />
           </div>
-          <div
-            className="animate-slide-up p-6 bg-white rounded-lg shadow-lg border border-gray-200"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <SubscriptionService />
-          </div>
+
           <div
             className="animate-slide-up p-6 bg-white rounded-lg shadow-lg border border-gray-200"
             style={{ animationDelay: "0.4s" }}
           >
             <Blog />
-          </div>
-          <div
-            className="animate-slide-up p-6 bg-white rounded-lg shadow-lg border border-gray-200"
-            style={{ animationDelay: "0.6s" }}
-          >
-            <LoyaltyProgram />
           </div>
         </div>
       </main>

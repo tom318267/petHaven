@@ -9,13 +9,6 @@ interface Product {
   price: number;
 }
 
-interface ProductSuggestionsProps {
-  petType: string;
-  petAge: number;
-  images: string[];
-  price: number;
-}
-
 const ProductSuggestions = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -95,14 +88,14 @@ const ProductSuggestions = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-blue-100 p-6 rounded-xl max-w-sm mx-auto flex flex-col h-full"
+              className="bg-blue-100 p-6 rounded-xl max-w-sm mx-auto flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Image */}
               <div className="flex justify-center flex-shrink-0">
                 <img
                   src={product.image}
                   alt="product image"
-                  className="h-40 w-40 object-cover"
+                  className="h-48 w-48 object-cover"
                 />
               </div>
 

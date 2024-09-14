@@ -120,7 +120,7 @@ const ProductsPage = () => {
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-6xl font-extrabold text-center mb-16 mt-8"
+                  className="text-4xl font-extrabold text-center mb-16 mt-8"
                 >
                   Our Products
                 </motion.h1>
@@ -128,7 +128,7 @@ const ProductsPage = () => {
                   variants={containerVariants}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4 pb-16" // Added pb-16 here
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4 pb-16"
                 >
                   {products.map((product) => (
                     <motion.div
@@ -137,16 +137,17 @@ const ProductsPage = () => {
                       whileHover={{ scale: 1.05 }}
                       className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
                     >
-                      <div className="relative h-64">
+                      <div className="relative h-80">
                         <Image
                           src={product.image}
                           alt={product.name}
                           layout="fill"
                           objectFit="contain"
+                          className="p-4"
                         />
                       </div>
-                      <div className="p-4 flex flex-col flex-grow">
-                        <h2 className="text-2xl font-semibold mb-4 mt-2">
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h2 className="text-2xl font-semibold mb-3">
                           {product.name}
                         </h2>
                         <p className="text-gray-600 mb-4 flex-grow">
