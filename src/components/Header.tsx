@@ -2,8 +2,13 @@ import React from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "../store"; // Adjust this import based on your store setup
+import LogoutButton from "./LogoutButton"; // Import the existing LogoutButton component
 
 const Header = () => {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   return (
     <nav className="bg-white shadow-sm py-4 pt-6 text-black">
       <div className="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
@@ -47,13 +52,17 @@ const Header = () => {
 
         {/* Action Buttons */}
         <div className="flex items-center space-x-4">
-          <Link
-            href="/login"
-            className="flex items-center px-4 py-2 border rounded-lg text-blue-600 border-blue-600 hover:bg-blue-100 transition"
-          >
-            <FaUser className="mr-2" />
-            Login
-          </Link>
+          {user ? (
+            <LogoutButton />
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center px-4 py-2 border rounded-lg text-blue-600 border-blue-600 hover:bg-blue-100 transition"
+            >
+              <FaUser className="mr-2" />
+              Login
+            </Link>
+          )}
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
             <FaPhoneAlt className="mr-2" />
             555-555-5555
