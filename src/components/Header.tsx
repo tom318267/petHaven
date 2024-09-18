@@ -47,10 +47,13 @@ const Header = () => {
 
         {/* Action Buttons */}
         <div className="flex items-center space-x-4">
-          <button className="flex items-center px-4 py-2 border rounded-lg text-blue-600 border-blue-600 hover:bg-blue-100 transition">
+          <Link
+            href="/login"
+            className="flex items-center px-4 py-2 border rounded-lg text-blue-600 border-blue-600 hover:bg-blue-100 transition"
+          >
             <FaUser className="mr-2" />
             Login
-          </button>
+          </Link>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
             <FaPhoneAlt className="mr-2" />
             555-555-5555

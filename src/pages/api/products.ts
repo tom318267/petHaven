@@ -8,7 +8,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const { client } = await connectToDatabase();
-      const db = client.db("test"); // Explicitly use the 'test' database
+      const db = client.db("test");
       const products = await db.collection("products").find({}).toArray();
       console.log("Fetched products:", products);
       res.status(200).json(products);

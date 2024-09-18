@@ -27,6 +27,7 @@ const BlogsPage = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -71,6 +72,16 @@ const BlogsPage = () => {
     }
   };
 
+  const filteredBlogs = blogs.filter(
+    (blog) =>
+      blog.title.toLowerCase().includes(filter.toLowerCase()) ||
+      blog.content.toLowerCase().includes(filter.toLowerCase()) ||
+      (blog.tags &&
+        blog.tags.some((tag) =>
+          tag.toLowerCase().includes(filter.toLowerCase())
+        ))
+  );
+
   return (
     <AnimatePresence mode="wait">
       {isLoading ? (
@@ -108,12 +119,21 @@ const BlogsPage = () => {
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-4xl font-extrabold text-center mb-16 mt-8"
+                  className="text-5xl font-extrabold text-center mb-16 mt-8"
                 >
                   Our Blogs
                 </motion.h1>
+                <div className="mb-8">
+                  <input
+                    type="text"
+                    placeholder="Search blogs..."
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                  />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {blogs.map((blog) => (
+                  {filteredBlogs.map((blog) => (
                     <div key={blog._id} className="flex">
                       <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col w-full relative">
                         {blog.image ? (
