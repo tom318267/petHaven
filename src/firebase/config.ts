@@ -1,9 +1,8 @@
 import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey:
-    "AIzaSyD155555555555555555555555555555555555555555555555555555555555555",
+  apiKey: "AIzaSyD155555555555555555555555555555555555555555555555555555555555",
   authDomain: "pet-haven-123456.firebaseapp.com",
   projectId: "pet-haven-123456",
   storageBucket: "pet-haven-123456.appspot.com",
@@ -11,5 +10,11 @@ const firebaseConfig = {
   appId: "1:1234567890:web:1234567890",
 };
 
-const app = initializeApp(firebaseConfig);
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0];
+}
+
 export const auth = getAuth(app);

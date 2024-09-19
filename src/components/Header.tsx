@@ -1,13 +1,24 @@
-import React from "react";
-import { FaUser, FaPhoneAlt } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { FaUser, FaShoppingCart } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { RootState } from "../store"; // Adjust this import based on your store setup
-import LogoutButton from "./LogoutButton"; // Import the existing LogoutButton component
+import { RootState } from "../store";
+import LogoutButton from "./LogoutButton";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth"; // Import Firebase auth
 
 const Header = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const [user, setUser] = useState<User | null>(null);
+  const userState = useSelector((state: RootState) => state.auth.user);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <nav className="bg-white shadow-sm py-4 pt-6 text-black">
@@ -53,20 +64,35 @@ const Header = () => {
         {/* Action Buttons */}
         <div className="flex items-center space-x-4">
           {user ? (
-            <LogoutButton />
+            <>
+              <span className="text-sm font-medium mr-4">
+                Welcome, {user.email ? user.email.split("@")[0] : "Pet Lover"}
+              </span>
+              <Link
+                href="/cart"
+                className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors"
+                aria-label="Shopping Cart"
+              >
+                <FaShoppingCart size={18} />
+              </Link>
+              <LogoutButton />
+            </>
           ) : (
-            <Link
-              href="/login"
-              className="flex items-center px-4 py-2 border rounded-lg text-blue-600 border-blue-600 hover:bg-blue-100 transition"
-            >
-              <FaUser className="mr-2" />
-              Login
-            </Link>
+            <>
+              <Link
+                href="/login"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out text-base font-medium"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/signup"
+                className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-100 transition duration-300 ease-in-out text-base font-medium"
+              >
+                Sign Up
+              </Link>
+            </>
           )}
-          <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            <FaPhoneAlt className="mr-2" />
-            555-555-5555
-          </button>
         </div>
       </div>
     </nav>

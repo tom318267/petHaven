@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-import { User } from "firebase/auth";
 import { RootState } from "../store";
 import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
 import Login from "../components/Login";
+import Signup from "../components/Signup";
 import UserProfile from "../components/UserProfile";
 
-const LoginPage = () => {
+const SignupPage = () => {
+  const [showSignup, setShowSignup] = useState(true);
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -33,16 +32,20 @@ const LoginPage = () => {
         ) : (
           <>
             <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-              Log In
+              {showSignup ? "Sign Up" : "Log In"}
             </h1>
-            <Login />
+            {showSignup ? <Signup /> : <Login />}
             <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">Don't have an account?</p>
+              <p className="text-sm text-gray-600">
+                {showSignup
+                  ? "Already have an account?"
+                  : "Don't have an account?"}
+              </p>
               <button
-                onClick={() => router.push("/signup")}
+                onClick={() => setShowSignup(!showSignup)}
                 className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
               >
-                Sign Up
+                {showSignup ? "Log In" : "Sign Up"}
               </button>
             </div>
           </>
@@ -52,4 +55,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;

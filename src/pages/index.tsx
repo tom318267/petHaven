@@ -1,15 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import ProductSuggestions from "../components/ProductSuggestions";
-import SubscriptionService from "../components/SubscriptionService";
-import LoyaltyProgram from "../components/LoyaltyProgram";
 import { Urbanist } from "next/font/google";
 import Blog from "@/components/Blog";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 const Home = (): JSX.Element => {
+  const router = useRouter();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -71,6 +72,7 @@ const Home = (): JSX.Element => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
+                  onClick={() => router.push("/products")}
                 >
                   Shop Now
                 </motion.button>

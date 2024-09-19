@@ -119,10 +119,20 @@ const BlogsPage = () => {
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-5xl font-extrabold text-center mb-16 mt-8"
+                  className="text-5xl font-extrabold text-center mb-6"
                 >
-                  Our Blogs
+                  Our Blog
                 </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-lg"
+                >
+                  Stay informed and inspired with our latest articles on pet
+                  care, health tips, and heartwarming stories. Our blog is your
+                  go-to resource for all things pet-related.
+                </motion.p>
                 <div className="mb-8">
                   <input
                     type="text"
