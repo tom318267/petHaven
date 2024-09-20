@@ -4,6 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Lottie from "lottie-react";
 import pawPrintAnimation from "../../public/animations/paw-print-loader.json";
 import { FaChevronDown, FaSort } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 interface Product {
   _id: string;
@@ -14,6 +18,13 @@ interface Product {
   price: number;
   category: string;
   image: string;
+}
+
+interface CartItem {
+  id: string | number;
+  name: string;
+  quantity: number;
+  price: number; // Add this if it's in your store's CartItem
 }
 
 const PawPrintLoader = () => {
@@ -32,6 +43,7 @@ const ProductsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState("default");
+  const dispatch = useDispatch();
 
   const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -136,6 +148,8 @@ const ProductsPage = () => {
     },
   };
 
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
   return (
     <AnimatePresence mode="wait">
       {isLoading ? (
@@ -173,7 +187,7 @@ const ProductsPage = () => {
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-5xl font-extrabold text-center mb-4"
+                  className="text-5xl font-extrabold text-center mb-8"
                 >
                   Our Products
                 </motion.h1>
@@ -181,9 +195,14 @@ const ProductsPage = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-lg"
+                  className="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg mt-4"
                 >
-                  Discover our wide range of high-quality pet products.
+                  Discover our wide range of high-quality pet products. From
+                  nutritious food to comfortable accessories, we offer
+                  everything your furry friend needs for a happy, healthy life.
+                  Our carefully curated selection ensures that you'll find the
+                  perfect items for your beloved pets, no matter their size,
+                  breed, or preferences.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
@@ -267,11 +286,11 @@ const ProductsPage = () => {
                           className="p-4"
                         />
                       </div>
-                      <div className="p-6 flex flex-col flex-grow">
+                      <div className="p-6 flex flex-col h-full">
                         <h2 className="text-2xl font-semibold mb-3">
                           {product.name}
                         </h2>
-                        <p className="text-gray-600 mb-4 flex-grow">
+                        <p className="text-gray-600 mb-4 flex-grow overflow-y-auto">
                           {product.description}
                         </p>
                         <div className="mt-auto flex justify-between items-center">
@@ -281,6 +300,20 @@ const ProductsPage = () => {
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                              console.log("Adding to cart:", {
+                                id: product._id,
+                                name: product.name,
+                                price: product.price,
+                              });
+                              dispatch(
+                                addToCart({
+                                  id: product._id,
+                                  name: product.name,
+                                  price: product.price,
+                                })
+                              );
+                            }}
                             className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
                           >
                             Add to Cart
@@ -290,6 +323,14 @@ const ProductsPage = () => {
                     </motion.div>
                   ))}
                 </motion.div>
+                <div>
+                  <h2>Cart Contents:</h2>
+                  {cartItems.map((item: CartItem) => (
+                    <div key={item.id}>
+                      {item.name} - Quantity: {item.quantity}
+                    </div>
+                  ))}
+                </div>
               </>
             )}
           </div>

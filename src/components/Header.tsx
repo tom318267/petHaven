@@ -5,11 +5,14 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import LogoutButton from "./LogoutButton";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth"; // Import Firebase auth
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
 const Header = () => {
   const [user, setUser] = useState<User | null>(null);
   const userState = useSelector((state: RootState) => state.auth.user);
+  const cartItemCount = useSelector((state: RootState) =>
+    state.cart.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   useEffect(() => {
     const auth = getAuth();
@@ -65,16 +68,26 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           {user ? (
             <>
-              <span className="text-sm font-medium mr-4">
+              <span className="text-lg font-medium mr-4">
+                {" "}
+                {/* Updated from text-sm to text-lg */}
                 Welcome, {user.email ? user.email.split("@")[0] : "Pet Lover"}
               </span>
               <Link
                 href="/cart"
-                className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors"
+                className="p-3 text-blue-600 hover:text-blue-800 transition-colors"
                 aria-label="Shopping Cart"
               >
-                <FaShoppingCart size={18} />
+                <div className="relative">
+                  <FaShoppingCart size={24} />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </div>
               </Link>
+
               <LogoutButton />
             </>
           ) : (

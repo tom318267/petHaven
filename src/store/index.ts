@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
+import cartReducer from "./cartSlice";
 
 // Add this interface definition
 interface AuthState {
@@ -9,16 +10,19 @@ interface AuthState {
   } | null;
 }
 
-// Update or add this RootState interface
+// Update this RootState interface
 export interface RootState {
   auth: AuthState;
-  // ... other slices ...
+  cart: ReturnType<typeof cartReducer>;
 }
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    cart: cartReducer,
   },
 });
 
 export type AppDispatch = typeof store.dispatch;
+
+export type { CartItem } from "./cartSlice";
