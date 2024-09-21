@@ -110,7 +110,7 @@ const BlogsPage = () => {
           exit={{ opacity: 0 }}
           className="min-h-screen bg-[#E5F5FF]"
         >
-          <div className="container mx-auto px-4 py-16">
+          <div className="container mx-auto px-4 py-24">
             {error ? (
               <div className="text-red-500 text-center text-xl">{error}</div>
             ) : (
@@ -127,7 +127,7 @@ const BlogsPage = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-lg"
+                  className="text-center text-gray-600 mb-12 max-w-4xl mx-auto text-lg"
                 >
                   Stay informed and inspired with our latest articles on pet
                   care, health tips, and heartwarming stories. Our blog is your

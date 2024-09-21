@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
-import { removeFromCart, updateQuantity } from "../store/cartSlice";
+import {
+  removeFromCart,
+  updateQuantity,
+  setCart,
+  initializeCart,
+} from "../store/cartSlice";
 import Image from "next/image";
 
 const CartPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      const parsedCart = JSON.parse(storedCart);
+      if (parsedCart.items && parsedCart.items.length > 0) {
+        dispatch(setCart(parsedCart.items));
+      }
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      localStorage.setItem("cart", JSON.stringify({ items: cartItems }));
+    }
+  }, [cartItems]);
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -15,27 +36,26 @@ const CartPage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow container mx-auto px-4 py-8 flex flex-col">
+      <div className="flex-grow container mx-auto px-4 py-24 flex flex-col">
+        <h1 className="text-5xl font-extrabold text-center mb-6">Your Cart</h1>
         {cartItems.length === 0 ? (
           <div className="flex-grow flex flex-col items-center justify-center">
             <Image
-              src="/empty-cart.png"
-              alt="Empty cart"
+              src="/images/dog.png"
+              alt="Sad dog - Empty cart"
               width={200}
               height={200}
-              className="mb-8"
+              className="mb-8 object-contain pb-6"
             />
-            <h1 className="text-3xl font-bold mb-4">Your Shopping Cart</h1>
-            <p className="text-gray-600">
-              Your cart is as empty as a desert mirage!
+            <p className="text-xl text-gray-600">
+              Your cart is as empty as this poor pup's food bowl!
             </p>
           </div>
         ) : (
           <>
-            <h1 className="text-3xl font-bold mb-8">Your Shopping Cart</h1>
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden my-8">
               <table className="w-full">
-                <thead className="bg-gray-100">
+                <thead className="bg-blue-600 text-white">
                   <tr>
                     <th className="px-6 py-3 text-left">Product</th>
                     <th className="px-6 py-3 text-left">Price</th>
@@ -47,7 +67,16 @@ const CartPage: React.FC = () => {
                 <tbody>
                   {cartItems.map((item) => (
                     <tr key={item.id} className="border-b">
-                      <td className="px-6 py-4">{item.name}</td>
+                      <td className="px-6 py-4 flex items-center">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                          className="mr-4 object-cover"
+                        />
+                        <span>{item.name}</span>
+                      </td>
                       <td className="px-6 py-4">${item.price.toFixed(2)}</td>
                       <td className="px-6 py-4">
                         <input
@@ -87,10 +116,10 @@ const CartPage: React.FC = () => {
               </table>
             </div>
             <div className="mt-8 text-right">
-              <p className="text-xl font-semibold">
+              <p className="text-xl font-semibold mb-4">
                 Total: ${total.toFixed(2)}
               </p>
-              <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
                 Proceed to Checkout
               </button>
             </div>

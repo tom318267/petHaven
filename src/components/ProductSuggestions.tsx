@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 
 interface Product {
   id: string;
@@ -11,6 +13,7 @@ interface Product {
 
 const ProductSuggestions = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,6 +71,18 @@ const ProductSuggestions = () => {
     return words.slice(0, wordCount).join(" ") + "...";
   };
 
+  const handleAddToCart = (product: Product) => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        userId: "some-user-id",
+      })
+    );
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -117,7 +132,8 @@ const ProductSuggestions = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
+                  className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
+                  onClick={() => handleAddToCart(product)}
                 >
                   Add To Cart
                 </motion.button>

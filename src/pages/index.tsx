@@ -71,7 +71,7 @@ const Home = (): JSX.Element => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
+                  className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
                   onClick={() => router.push("/products")}
                 >
                   Shop Now
@@ -79,7 +79,7 @@ const Home = (): JSX.Element => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-black py-3 px-6 rounded-lg font-semibold hover:bg-yellow-300 transition flex items-center space-x-2 shadow-md"
+                  className="bg-white text-black py-3 px-6 rounded-lg font-medium hover:bg-yellow-300 transition flex items-center space-x-2 shadow-md"
                 >
                   <span>Learn More</span>
                 </motion.button>

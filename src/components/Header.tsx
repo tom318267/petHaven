@@ -11,7 +11,9 @@ const Header = () => {
   const [user, setUser] = useState<User | null>(null);
   const userState = useSelector((state: RootState) => state.auth.user);
   const cartItemCount = useSelector((state: RootState) =>
-    state.cart.items.reduce((total, item) => total + item.quantity, 0)
+    state.cart.items
+      ? state.cart.items.reduce((total, item) => total + item.quantity, 0)
+      : 0
   );
 
   useEffect(() => {
@@ -47,13 +49,6 @@ const Header = () => {
             Products
             <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </Link>
-          <Link
-            href="/loyalty-program"
-            className="hover:text-black relative group"
-          >
-            Loyalty Program
-            <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
           <Link href="/blogs" className="hover:text-black relative group">
             Blogs
             <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -66,28 +61,30 @@ const Header = () => {
 
         {/* Action Buttons */}
         <div className="flex items-center space-x-4">
+          <Link
+            href="/cart"
+            className="p-3 text-blue-600 hover:text-blue-800 transition-colors"
+            aria-label="Shopping Cart"
+          >
+            <div className="relative">
+              <FaShoppingCart size={24} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItemCount}
+                </span>
+              )}
+            </div>
+          </Link>
+
           {user ? (
             <>
-              <span className="text-lg font-medium mr-4">
-                {" "}
-                {/* Updated from text-sm to text-lg */}
-                Welcome, {user.email ? user.email.split("@")[0] : "Pet Lover"}
+              <span className="text-lg font-medium mr-4 text-gray-700">
+                Welcome,{" "}
+                {user.email
+                  ? user.email.split("@")[0].charAt(0).toUpperCase() +
+                    user.email.split("@")[0].slice(1)
+                  : "Pet Lover"}
               </span>
-              <Link
-                href="/cart"
-                className="p-3 text-blue-600 hover:text-blue-800 transition-colors"
-                aria-label="Shopping Cart"
-              >
-                <div className="relative">
-                  <FaShoppingCart size={24} />
-                  {cartItemCount > 0 && (
-                    <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                      {cartItemCount}
-                    </span>
-                  )}
-                </div>
-              </Link>
-
               <LogoutButton />
             </>
           ) : (

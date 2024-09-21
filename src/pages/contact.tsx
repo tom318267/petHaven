@@ -52,7 +52,7 @@ const ContactPage = () => {
           <div className="mb-6">
             <label
               htmlFor="name"
-              className="block mb-2 text-sm font-medium text-gray-900"
+              className="block mb-2 text-md font-medium text-gray-700"
             >
               Your Name
             </label>
@@ -62,14 +62,14 @@ const ContactPage = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
             />
           </div>
           <div className="mb-6">
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900"
+              className="block mb-2 text-md font-medium text-gray-700"
             >
               Your Email
             </label>
@@ -79,14 +79,14 @@ const ContactPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
             />
           </div>
           <div className="mb-6">
             <label
               htmlFor="message"
-              className="block mb-2 text-sm font-medium text-gray-900"
+              className="block mb-2 text-md font-medium text-gray-700"
             >
               Your Message
             </label>
@@ -96,7 +96,7 @@ const ContactPage = () => {
               value={formData.message}
               onChange={handleChange}
               rows={4}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
             ></textarea>
           </div>
@@ -104,7 +104,7 @@ const ContactPage = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md text-lg" // Updated classes
+            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md" // Updated classes
           >
             Send Message
           </motion.button>

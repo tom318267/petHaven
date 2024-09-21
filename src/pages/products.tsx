@@ -24,7 +24,8 @@ interface CartItem {
   id: string | number;
   name: string;
   quantity: number;
-  price: number; // Add this if it's in your store's CartItem
+  price: number;
+  userId: string; // Add this line
 }
 
 const PawPrintLoader = () => {
@@ -149,6 +150,7 @@ const ProductsPage = () => {
   };
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <AnimatePresence mode="wait">
@@ -178,7 +180,7 @@ const ProductsPage = () => {
           exit={{ opacity: 0 }}
           className="min-h-screen bg-[#E5F5FF]"
         >
-          <div className="container mx-auto px-4 py-16">
+          <div className="container mx-auto px-4 py-24">
             {error ? (
               <div className="text-red-500 text-center text-xl">{error}</div>
             ) : (
@@ -195,7 +197,7 @@ const ProductsPage = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg mt-4"
+                  className="text-center text-gray-600 mb-12 max-w-4xl mx-auto text-lg mt-4"
                 >
                   Discover our wide range of high-quality pet products. From
                   nutritious food to comfortable accessories, we offer
@@ -305,16 +307,19 @@ const ProductsPage = () => {
                                 id: product._id,
                                 name: product.name,
                                 price: product.price,
+                                image: product.image, // Add this line
                               });
                               dispatch(
                                 addToCart({
                                   id: product._id,
                                   name: product.name,
                                   price: product.price,
+                                  userId: user?.name || "guest",
+                                  image: product.image, // Add this line
                                 })
                               );
                             }}
-                            className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
+                            className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
                           >
                             Add to Cart
                           </motion.button>
@@ -323,14 +328,6 @@ const ProductsPage = () => {
                     </motion.div>
                   ))}
                 </motion.div>
-                <div>
-                  <h2>Cart Contents:</h2>
-                  {cartItems.map((item: CartItem) => (
-                    <div key={item.id}>
-                      {item.name} - Quantity: {item.quantity}
-                    </div>
-                  ))}
-                </div>
               </>
             )}
           </div>

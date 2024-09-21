@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { RootState } from "../store";
 import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
-import UserProfile from "../components/UserProfile";
+import { toast } from "react-toastify";
+import SignUp from "../components/Signup";
 
-const SignupPage = () => {
-  const [showSignup, setShowSignup] = useState(true);
+const SignUpPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -19,40 +20,61 @@ const SignupPage = () => {
     return () => unsubscribe();
   }, [dispatch]);
 
+  useEffect(() => {
+    if (user) {
+      const welcomeMessages = [
+        "Welcome to the pack!",
+        "Bark-tastic! You're all set!",
+        "Fur-tastic to have you on board!",
+        "You're officially a dog's best friend!",
+      ];
+      const randomMessage =
+        welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+
+      setTimeout(() => {
+        toast.success(randomMessage, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        router.push("/");
+      }, 100);
+    }
+  }, [user, router]);
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        {user ? (
-          <>
-            <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-              Welcome
-            </h1>
-            <UserProfile user={user} />
-          </>
-        ) : (
-          <>
-            <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-              {showSignup ? "Sign Up" : "Log In"}
-            </h1>
-            {showSignup ? <Signup /> : <Login />}
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">
-                {showSignup
-                  ? "Already have an account?"
-                  : "Don't have an account?"}
-              </p>
-              <button
-                onClick={() => setShowSignup(!showSignup)}
-                className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
-              >
-                {showSignup ? "Log In" : "Sign Up"}
-              </button>
-            </div>
-          </>
-        )}
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Left Column - Form Section */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
+        <div className="w-full max-w-md">
+          <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-gray-800 text-center md:text-left">
+            Sign Up
+          </h1>
+
+          {/* Signup Component */}
+          <SignUp />
+          <div className="mt-4 text-center md:text-left">
+            <p className="text-sm text-gray-600">Already have an account?</p>
+            <Link
+              href="/login"
+              className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
+            >
+              Log In
+            </Link>
+          </div>
+        </div>
       </div>
+
+      {/* Right Column - Image Background (hidden on mobile) */}
+      <div
+        className="hidden md:block w-full md:w-1/2 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/signupcat.jpg')" }}
+      ></div>
     </div>
   );
 };
 
-export default SignupPage;
+export default SignUpPage;
