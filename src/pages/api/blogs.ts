@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const { method } = req;
   const { client } = await connectToDatabase();
-  const db = client.db("test"); // Use your actual database name
+  const db = client.db("test");
 
   switch (method) {
     case "GET":

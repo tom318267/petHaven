@@ -4,6 +4,7 @@ import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import Lottie from "lottie-react";
 import pawPrintAnimation from "../../public/animations/paw-print-loader.json";
+import Link from "next/link";
 
 interface Blog {
   _id: string;
@@ -121,7 +122,7 @@ const BlogsPage = () => {
                   transition={{ duration: 0.5 }}
                   className="text-5xl font-extrabold text-center mb-6"
                 >
-                  Our Blog
+                  Our Blogs
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: -20 }}
@@ -175,8 +176,11 @@ const BlogsPage = () => {
                             {blog.title}
                           </h2>
                           <p className="text-gray-600 mb-4">
-                            {blog.content.substring(0, 150)}...
+                            {blog.content.length > 150
+                              ? blog.content.substring(0, 150) + "..."
+                              : blog.content}
                           </p>
+
                           <div className="mt-auto">
                             <div className="flex justify-between items-center mb-2">
                               <span className="text-sm text-gray-500">
@@ -201,32 +205,25 @@ const BlogsPage = () => {
                           </div>
                         </div>
                         <div className="absolute bottom-2 right-2 flex items-center">
-                          <span className="text-blue-500 mr-1 text-sm font-medium">
-                            Read more
-                          </span>
-                          <button
-                            className="p-1 text-blue-500 hover:text-blue-600 transition duration-300"
-                            onClick={() => {
-                              // TODO: Implement navigation to full blog post
-                              console.log(`View full blog post: ${blog._id}`);
-                            }}
-                            aria-label="Read more"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                              />
-                            </svg>
-                          </button>
+                          <Link href={`/blog/${blog._id}`} passHref>
+                            <span className="text-blue-500 mr-1 text-sm font-medium cursor-pointer flex items-center">
+                              Read more
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 ml-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                />
+                              </svg>
+                            </span>
+                          </Link>
                         </div>
                       </div>
                     </div>

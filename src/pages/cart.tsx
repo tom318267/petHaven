@@ -8,6 +8,14 @@ import {
   initializeCart,
 } from "../store/cartSlice";
 import Image from "next/image";
+// Add these imports
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+// Add this line outside of the component
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 const CartPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -33,6 +41,34 @@ const CartPage: React.FC = () => {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = async () => {
+    console.log("Checkout started");
+    try {
+      const stripe = await stripePromise;
+      console.log("Stripe loaded");
+
+      // Log cart items to verify structure
+      console.log("Cart Items:", cartItems);
+
+      const response = await axios.post("/api/create-checkout-session", {
+        items: cartItems,
+      });
+
+      console.log("Checkout session created", response.data);
+
+      const result = await stripe!.redirectToCheckout({
+        sessionId: response.data.id,
+      });
+
+      if (result.error) {
+        console.error("Stripe redirect error:", result.error.message);
+        alert(result.error.message);
+      }
+    } catch (error) {
+      console.error("Error in creating checkout session:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -119,7 +155,10 @@ const CartPage: React.FC = () => {
               <p className="text-xl font-semibold mb-4">
                 Total: ${total.toFixed(2)}
               </p>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+              <button
+                onClick={handleCheckout}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
                 Proceed to Checkout
               </button>
             </div>
