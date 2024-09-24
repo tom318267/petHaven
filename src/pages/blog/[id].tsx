@@ -75,6 +75,27 @@ const BlogPostPage = () => {
     return { __html: htmlContent };
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <AnimatePresence mode="wait">
       {isLoading ? (
@@ -98,9 +119,10 @@ const BlogPostPage = () => {
       ) : (
         <motion.div
           key="content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={containerVariants}
           className="min-h-screen bg-[#E5F5FF] py-12"
         >
           <div className="container mx-auto px-4 max-w-4xl">
@@ -110,20 +132,36 @@ const BlogPostPage = () => {
               <div className="text-center py-10">Blog post not found</div>
             ) : (
               <>
-                <Link href="/blogs" passHref>
-                  <button className="mb-6 text-blue-500 hover:text-blue-600 transition duration-300">
-                    ← Back to Blogs
-                  </button>
-                </Link>
-                <div className="bg-white rounded-lg shadow-md p-8">
-                  <h1 className="text-4xl font-bold mb-4">{blogPost.title}</h1>
-                  <div className="mb-6 text-gray-600">
+                <motion.div variants={itemVariants}>
+                  <Link href="/blogs" passHref>
+                    <button className="mb-6 text-blue-500 hover:text-blue-600 transition duration-300">
+                      ← Back to Blogs
+                    </button>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  className="bg-white rounded-lg shadow-md p-8"
+                  variants={itemVariants}
+                >
+                  <motion.h1
+                    className="text-4xl font-bold mb-4"
+                    variants={itemVariants}
+                  >
+                    {blogPost.title}
+                  </motion.h1>
+                  <motion.div
+                    className="mb-6 text-gray-600"
+                    variants={itemVariants}
+                  >
                     <span>By {blogPost.author}</span>
                     <span className="mx-2">|</span>
                     <span>{formatDate(blogPost.createdAt)}</span>
-                  </div>
+                  </motion.div>
                   {blogPost.image && (
-                    <div className="mb-8 relative w-full h-96">
+                    <motion.div
+                      className="mb-8 relative w-full h-96"
+                      variants={itemVariants}
+                    >
                       <Image
                         src={blogPost.image}
                         alt={blogPost.title}
@@ -131,14 +169,15 @@ const BlogPostPage = () => {
                         objectFit="cover"
                         className="rounded-lg"
                       />
-                    </div>
+                    </motion.div>
                   )}
-                  <div
+                  <motion.div
                     className="prose max-w-none mb-8"
                     dangerouslySetInnerHTML={createMarkup(blogPost.content)}
+                    variants={itemVariants}
                   />
                   {blogPost.tags && (
-                    <div className="mb-8">
+                    <motion.div className="mb-8" variants={itemVariants}>
                       {blogPost.tags.map((tag, index) => (
                         <span
                           key={index}
@@ -147,9 +186,9 @@ const BlogPostPage = () => {
                           #{tag}
                         </span>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
-                </div>
+                </motion.div>
               </>
             )}
           </div>

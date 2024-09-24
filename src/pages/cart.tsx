@@ -1,18 +1,12 @@
 import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
-import {
-  removeFromCart,
-  updateQuantity,
-  setCart,
-  initializeCart,
-} from "../store/cartSlice";
+import { removeFromCart, updateQuantity, setCart } from "../store/cartSlice";
 import Image from "next/image";
-// Add these imports
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
-// Add this line outside of the component
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
@@ -68,6 +62,18 @@ const CartPage: React.FC = () => {
     } catch (error) {
       console.error("Error in creating checkout session:", error);
     }
+  };
+
+  const handleRemoveFromCart = (itemId: string) => {
+    dispatch(removeFromCart(itemId));
+    toast.success("Item removed from cart", {
+      duration: 3000,
+      position: "bottom-right",
+      style: {
+        background: "#4CB944", // Green background
+        color: "#ffffff", // White text
+      },
+    });
   };
 
   return (
@@ -139,7 +145,7 @@ const CartPage: React.FC = () => {
                       <td className="px-6 py-4">
                         <button
                           onClick={() =>
-                            dispatch(removeFromCart(item.id.toString()))
+                            handleRemoveFromCart(item.id.toString())
                           }
                           className="text-red-600 hover:text-red-800"
                         >

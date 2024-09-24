@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster, toast, ToastOptions } from "react-hot-toast";
 
 interface Product {
   _id: string;
@@ -153,18 +153,17 @@ const ProductsPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const user = useSelector((state: RootState) => state.auth.user);
 
+  const toastOptions: ToastOptions = {
+    duration: 3000,
+    style: {
+      background: "#4CB944", // Green background
+      color: "#ffffff", // White text
+    },
+  };
+
   return (
     <AnimatePresence mode="wait">
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: "#4CB944", // Green background
-            color: "#ffffff", // White text
-          },
-        }}
-      />
+      <Toaster position="bottom-right" toastOptions={toastOptions} />
       {isLoading ? (
         <motion.div
           key="loading"
@@ -330,7 +329,10 @@ const ProductsPage = () => {
                                 })
                               );
                               // Update the toast notification
-                              toast.success(`${product.name} added to cart!`);
+                              toast.success(
+                                `${product.name} added to cart!`,
+                                toastOptions
+                              );
                             }}
                             className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
                           >

@@ -5,10 +5,10 @@ import Link from "next/link";
 import { RootState } from "../store";
 import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
+import Signup from "../components/Signup";
 import { toast, Toaster } from "react-hot-toast";
-import SignUp from "../components/Signup";
 
-const SignUpPage = () => {
+const SignupPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -22,19 +22,23 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (user) {
-      const welcomeMessages = [
+      const funMessages = [
         "Welcome to the pack!",
-        "Pawsome! You're all set!",
-        "Fur-tastic! Your account is ready!",
-        "Tail-wagging welcome to you!",
+        "Woof woof! You're in!",
+        "Tail-wagging good to see you!",
+        "Paw-some signup success!",
       ];
       const randomMessage =
-        welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+        funMessages[Math.floor(Math.random() * funMessages.length)];
 
-      // Show the toast immediately
+      // Show the toast immediately with green background
       toast.success(randomMessage, {
         duration: 3000,
         position: "bottom-right",
+        style: {
+          background: "#4CB944", // Green background
+          color: "#ffffff", // White text
+        },
       });
 
       // Delay the redirection
@@ -46,17 +50,6 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: "#4CB944", // Green background
-            color: "#ffffff", // White text
-          },
-        }}
-      />
-
       {/* Left Column - Form Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
         <div className="w-full max-w-md">
@@ -65,7 +58,7 @@ const SignUpPage = () => {
           </h1>
 
           {/* Signup Component */}
-          <SignUp />
+          <Signup />
           <div className="mt-4 text-center md:text-left">
             <p className="text-sm text-gray-600">Already have an account?</p>
             <Link
@@ -87,4 +80,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignupPage;

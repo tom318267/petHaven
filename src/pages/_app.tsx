@@ -8,6 +8,7 @@ import { Urbanist } from "next/font/google";
 import { initializeCart } from "../store/cartSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "react-hot-toast";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Layout>
         <ToastContainer />
+        <Toaster position="bottom-right" />
       </main>
     </Provider>
   );

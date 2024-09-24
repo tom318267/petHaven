@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/cartSlice";
+import { RootState } from "../store";
+import { toast } from "react-hot-toast";
 
 interface Product {
   id: string;
@@ -14,6 +16,7 @@ interface Product {
 const ProductSuggestions = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -78,9 +81,19 @@ const ProductSuggestions = () => {
         name: product.name,
         price: product.price,
         image: product.image,
-        userId: "some-user-id",
+        userId: user?.name || "guest",
       })
     );
+
+    // Add toast notification
+    toast.success(`${product.name} added to cart!`, {
+      duration: 3000,
+      position: "bottom-right",
+      style: {
+        background: "#4CB944",
+        color: "#ffffff",
+      },
+    });
   };
 
   return (
@@ -92,7 +105,7 @@ const ProductSuggestions = () => {
         <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           Our Featured Products
         </h2>
-        <p className="text-lg text-[#1A1A1A] text-center mb-12">
+        <p className="text-lg text-[#1A1A1A] text-center mb-12 max-w-5xl mx-auto">
           Find the perfect products for your furry friend! Whether you're
           looking for toys, grooming essentials, or nutritional food, we've got
           you covered. Here are some of our top picks tailored to meet the
