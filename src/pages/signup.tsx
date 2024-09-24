@@ -5,7 +5,7 @@ import Link from "next/link";
 import { RootState } from "../store";
 import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
-import { toast } from "react-toastify";
+import { toast, Toaster } from "react-hot-toast";
 import SignUp from "../components/Signup";
 
 const SignUpPage = () => {
@@ -24,29 +24,39 @@ const SignUpPage = () => {
     if (user) {
       const welcomeMessages = [
         "Welcome to the pack!",
-        "Bark-tastic! You're all set!",
-        "Fur-tastic to have you on board!",
-        "You're officially a dog's best friend!",
+        "Pawsome! You're all set!",
+        "Fur-tastic! Your account is ready!",
+        "Tail-wagging welcome to you!",
       ];
       const randomMessage =
         welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
 
+      // Show the toast immediately
+      toast.success(randomMessage, {
+        duration: 3000,
+        position: "bottom-right",
+      });
+
+      // Delay the redirection
       setTimeout(() => {
-        toast.success(randomMessage, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
         router.push("/");
-      }, 100);
+      }, 2000); // Wait for 2 seconds before redirecting
     }
   }, [user, router]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#4CB944", // Green background
+            color: "#ffffff", // White text
+          },
+        }}
+      />
+
       {/* Left Column - Form Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
         <div className="w-full max-w-md">

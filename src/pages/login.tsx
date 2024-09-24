@@ -7,7 +7,7 @@ import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
 import Login from "../components/Login";
 import UserProfile from "../components/UserProfile";
-import { toast } from "react-toastify";
+import { toast, Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -32,18 +32,16 @@ const LoginPage = () => {
       const randomMessage =
         funMessages[Math.floor(Math.random() * funMessages.length)];
 
-      // Delay the toast and redirection slightly
+      // Show the toast immediately
+      toast.success(randomMessage, {
+        duration: 3000,
+        position: "bottom-right", // Changed from 'top-right' to 'bottom-right'
+      });
+
+      // Delay the redirection
       setTimeout(() => {
-        toast.success(randomMessage, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
         router.push("/");
-      }, 100);
+      }, 2000); // Wait for 2 seconds before redirecting
     }
   }, [user, router]);
 
@@ -81,6 +79,17 @@ const LoginPage = () => {
           )}
         </div>
       </div>
+      {/* Add the Toaster component */}
+      <Toaster
+        position="bottom-right" // Changed from 'top-right' to 'bottom-right'
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#4CB944", // Green background
+            color: "#ffffff", // White text
+          },
+        }}
+      />
     </div>
   );
 };
