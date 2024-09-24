@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTruck, FaSeedling, FaHeadset } from "react-icons/fa";
 
 const WhyChooseUs = () => {
   return (
@@ -16,10 +17,10 @@ const WhyChooseUs = () => {
 
         {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Feature 1 */}
+          {/* Feature 1: Free Shipping */}
           <div className="group bg-blue-100 p-8 rounded-lg shadow-lg text-center hover:bg-blue-200 transition duration-300">
             <div className="flex justify-center items-center mb-4">
-              <i className="fas fa-truck text-5xl text-blue-600 group-hover:text-blue-800 transition duration-300"></i>
+              <FaTruck className="text-5xl text-blue-600 group-hover:text-blue-800 transition duration-300" />
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600">
               Free Shipping
@@ -30,10 +31,10 @@ const WhyChooseUs = () => {
             </p>
           </div>
 
-          {/* Feature 2 */}
+          {/* Feature 2: Eco-Friendly Products */}
           <div className="group bg-green-100 p-8 rounded-lg shadow-lg text-center hover:bg-green-200 transition duration-300">
             <div className="flex justify-center items-center mb-4">
-              <i className="fas fa-seedling text-5xl text-green-600 group-hover:text-green-800 transition duration-300"></i>
+              <FaSeedling className="text-5xl text-green-600 group-hover:text-green-800 transition duration-300" />
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-green-600">
               Eco-Friendly Products
@@ -44,10 +45,10 @@ const WhyChooseUs = () => {
             </p>
           </div>
 
-          {/* Feature 3 */}
+          {/* Feature 3: 24/7 Customer Support */}
           <div className="group bg-yellow-100 p-8 rounded-lg shadow-lg text-center hover:bg-yellow-200 transition duration-300">
             <div className="flex justify-center items-center mb-4">
-              <i className="fas fa-headset text-5xl text-yellow-600 group-hover:text-yellow-800 transition duration-300"></i>
+              <FaHeadset className="text-5xl text-yellow-600 group-hover:text-yellow-800 transition duration-300" />
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-yellow-600">
               24/7 Customer Support
