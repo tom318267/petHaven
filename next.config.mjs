@@ -16,8 +16,8 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   webpack: (config, { dev, isServer }) => {
+    // Ensure test files are ignored in production builds
     if (!dev && !isServer) {
-      // Exclude test files and any __tests__ directories
       config.module.rules.push({
         test: /\/__tests__\//,
         use: "ignore-loader",
