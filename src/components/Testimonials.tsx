@@ -25,7 +25,7 @@ const TestimonialsSection = () => {
       location: "Miami, FL",
       image: "https://randomuser.me/api/portraits/men/32.jpg", // Placeholder image
       text: "I recently bought travel accessories for my dog from PetHaven, and it made our trip a breeze! The portable water bottle and collapsible food bowls were lifesavers. It's clear that PetHaven cares about making pet care convenient and enjoyable. The prices are great, and their shipping is always on time. I’ll definitely be returning for more!",
-      title: "",
+      title: "PetHaven’s grooming products are a lifesaver!",
     },
     {
       name: "Sophia L.",
