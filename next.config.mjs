@@ -18,10 +18,13 @@ const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     // Exclude test files from the production build
     if (!dev && !isServer) {
-      config.exclude = [...(config.exclude || []), /\/__tests__\/.+/];
+      config.module.rules.push({
+        test: /\/__tests__\/.+/,
+        loader: "ignore-loader",
+      });
     }
     return config;
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
