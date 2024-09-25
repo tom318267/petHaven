@@ -10,9 +10,8 @@ const WhyChooseUs = () => {
           Why Choose <span className="text-blue-600">Pet Haven?</span>
         </h2>
         <p className="text-lg text-[#1A1A1A] text-center mb-12 max-w-5xl mx-auto">
-          Discover why pet owners love Pet Haven! Our commitment to quality,
-          care, and convenience makes us the top choice for all your pet's
-          needs.
+          At Pet Haven, we&apos;re dedicated to providing the best for your
+          furry friends.
         </p>
 
         {/* Features Section */}

@@ -337,6 +337,12 @@ const ProductsPage = () => {
                     </motion.div>
                   ))}
                 </motion.div>
+                {filteredProducts.length === 0 ? (
+                  <p>
+                    We couldn&apos;t find any products matching your criteria.
+                    Please try adjusting your filters.
+                  </p>
+                ) : null}
               </>
             )}
           </div>

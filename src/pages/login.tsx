@@ -66,13 +66,9 @@ const LoginPage = () => {
           {/* Login Component */}
           <Login />
           <div className="mt-4 text-center md:text-left">
-            <p className="text-sm text-gray-600">Don't have an account?</p>
-            <Link
-              href="/signup"
-              className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
-            >
-              Sign Up
-            </Link>
+            <p>
+              Don&apos;t have an account? <a href="/signup">Sign up</a>
+            </p>
           </div>
         </div>
       </div>

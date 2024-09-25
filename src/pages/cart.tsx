@@ -90,7 +90,8 @@ const CartPage: React.FC = () => {
               className="mb-8 object-contain pb-6"
             />
             <p className="text-xl text-gray-600">
-              Your cart is as empty as this poor pup's food bowl!
+              Your cart is empty. Let&apos;s find something special for your
+              pet!
             </p>
           </div>
         ) : (

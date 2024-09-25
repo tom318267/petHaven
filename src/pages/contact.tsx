@@ -56,8 +56,9 @@ const ContactPage = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg mt-4"
         >
-          Have questions or feedback? We'd love to hear from you. Fill out the
-          form below, and we'll get back to you as soon as possible.
+          We&apos;d love to hear from you! Whether you have a question about our
+          products, need assistance with an order, or just want to say hello,
+          we&apos;re here to help.
         </motion.p>
         <motion.form
           initial={{ opacity: 0, y: 20 }}
