@@ -7,7 +7,7 @@ const Newsletter = () => {
           <h2 className="text-4xl font-bold mb-6">
             Stay Connected with Pet Haven
           </h2>
-          <p className="text-xl mb-10">
+          <p className="text-lg mb-10">
             Join our community of pet lovers! Get exclusive updates, special
             offers, and expert tips for your furry friends.
           </p>

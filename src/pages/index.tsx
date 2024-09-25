@@ -142,6 +142,7 @@ const Home = (): JSX.Element => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-white text-black py-3 px-6 rounded-lg font-medium hover:bg-yellow-300 transition flex items-center space-x-2 shadow-md"
+                    onClick={() => router.push("/about")}
                   >
                     <span>Learn More</span>
                   </motion.button>
