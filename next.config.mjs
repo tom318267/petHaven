@@ -15,6 +15,13 @@ const nextConfig = {
   experimental: {
     forceSwcTransforms: true,
   },
+  webpack: (config, { dev, isServer }) => {
+    // Exclude test files from the production build
+    if (!dev && !isServer) {
+      config.exclude = [...(config.exclude || []), /\/__tests__\/.+/];
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
