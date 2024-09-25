@@ -16,16 +16,15 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   webpack: (config, { dev, isServer }) => {
-    // Exclude test files from the production build
     if (!dev && !isServer) {
+      // Exclude test files and any __tests__ directories
       config.module.rules.push({
-        test: /\/__tests__\/.+/,
-        loader: "ignore-loader",
+        test: /\/__tests__\//,
+        use: "ignore-loader",
       });
     }
     return config;
   },
 };
 
-// Use ES module export syntax
 export default nextConfig;
