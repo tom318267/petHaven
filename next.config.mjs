@@ -11,6 +11,10 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  swcMinify: true,
+  experimental: {
+    forceSwcTransforms: true,
+  },
 };
 
 export default nextConfig;

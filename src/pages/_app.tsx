@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
-import { Urbanist } from "next/font/google";
+import { Urbanist } from "@next/font/google";
 import { initializeCart } from "../store/cartSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

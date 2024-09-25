@@ -18,9 +18,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     },
-    "types": ["react"]
+    "types": ["react", "jest", "node"],
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",
