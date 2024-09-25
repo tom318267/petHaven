@@ -7,12 +7,7 @@ interface ServiceCardProps {
   link: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({
-  icon,
-  title,
-  description,
-  link,
-}) => {
+const ServiceCard = ({ icon, title, description, link }: ServiceCardProps) => {
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 text-center max-w-sm mx-auto">
       <div className="flex justify-center items-center w-16 h-16 bg-teal-100 rounded-full mx-auto mb-4">
@@ -31,7 +26,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 };
 
 // Main component to render the services
-const ServicesSection: React.FC = () => {
+const ServicesSection = () => {
   return (
     <div className="py-12 bg-gray-100">
       <div className="container mx-auto px-4">

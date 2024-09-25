@@ -8,12 +8,11 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            {/* Replace the h3 with an Image component */}
             <Image
-              src="/images/haven2.svg" // Update this with your actual image path
+              src="/images/haven2.svg"
               alt="Pet Haven Logo"
-              width={150} // Adjust the width as needed
-              height={50} // Adjust the height as needed
+              width={150}
+              height={50}
               className="mb-4"
             />
             <p className="text-sm">Your one-stop shop for all pet needs.</p>

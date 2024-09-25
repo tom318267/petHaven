@@ -21,14 +21,6 @@ interface Product {
   image: string;
 }
 
-interface CartItem {
-  id: string | number;
-  name: string;
-  quantity: number;
-  price: number;
-  userId: string; // Add this line
-}
-
 const PawPrintLoader = () => {
   return (
     <div className="w-24 h-24">
@@ -43,6 +35,7 @@ const ProductsPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [isLoading, setIsLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState("default");
   const dispatch = useDispatch();
@@ -55,8 +48,6 @@ const ProductsPage = () => {
     const controller = new AbortController();
     const fetchProducts = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
         const response = await fetch("/api/products", {
           signal: controller.signal,
         });
@@ -88,9 +79,13 @@ const ProductsPage = () => {
       }
     };
 
+    const minLoadTime = 1000; // 1 second minimum display time
+    const loadingTimer = setTimeout(() => setShowLoader(false), minLoadTime);
+
     fetchProducts();
     return () => {
       controller.abort();
+      clearTimeout(loadingTimer);
     };
   }, []);
 
@@ -150,7 +145,6 @@ const ProductsPage = () => {
     },
   };
 
-  const cartItems = useSelector((state: RootState) => state.cart.items);
   const user = useSelector((state: RootState) => state.auth.user);
 
   const toastOptions: ToastOptions = {
@@ -164,7 +158,7 @@ const ProductsPage = () => {
   return (
     <AnimatePresence mode="wait">
       <Toaster position="bottom-right" toastOptions={toastOptions} />
-      {isLoading ? (
+      {isLoading || showLoader ? (
         <motion.div
           key="loading"
           initial={{ opacity: 0 }}

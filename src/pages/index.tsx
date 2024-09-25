@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Testimonials from "@/components/Testimonials";
 import WhyChooseUs from "@/components/WhoChooseUs";
 import { useInView } from "react-intersection-observer";
+import Newsletter from "@/components/Newsletter";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -26,9 +27,14 @@ const Home = (): JSX.Element => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [newsletterRef, newsletterInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
   const productControls = useAnimation();
   const whyChooseUsControls = useAnimation();
   const testimonialControls = useAnimation();
+  const newsletterControls = useAnimation();
 
   React.useEffect(() => {
     if (productInView) {
@@ -40,13 +46,18 @@ const Home = (): JSX.Element => {
     if (testimonialInView) {
       testimonialControls.start("visible");
     }
+    if (newsletterInView) {
+      newsletterControls.start("visible");
+    }
   }, [
     productControls,
     whyChooseUsControls,
     testimonialControls,
+    newsletterControls,
     productInView,
     whyChooseUsInView,
     testimonialInView,
+    newsletterInView,
   ]);
 
   const containerVariants = {
@@ -161,7 +172,7 @@ const Home = (): JSX.Element => {
 
         {/* Content sections */}
         <div className="container mx-auto px-4">
-          <div className="flex flex-col space-y-16">
+          <div className="flex flex-col space-y-16 mb-16">
             <motion.div
               ref={productRef}
               initial="hidden"
@@ -188,6 +199,15 @@ const Home = (): JSX.Element => {
               className="bg-white rounded-lg"
             >
               <Testimonials />
+            </motion.div>
+            <motion.div
+              ref={newsletterRef}
+              initial="hidden"
+              animate={newsletterControls}
+              variants={scrollVariants}
+              className="bg-white rounded-lg"
+            >
+              <Newsletter />
             </motion.div>
           </div>
         </div>

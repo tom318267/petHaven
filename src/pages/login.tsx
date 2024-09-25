@@ -6,7 +6,6 @@ import { RootState } from "../store";
 import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
 import Login from "../components/Login";
-import UserProfile from "../components/UserProfile";
 import { toast } from "react-hot-toast";
 
 const LoginPage = () => {
@@ -37,8 +36,8 @@ const LoginPage = () => {
         duration: 3000,
         position: "bottom-right",
         style: {
-          background: "#4CB944", // Green background
-          color: "#ffffff", // White text
+          background: "#4CB944",
+          color: "#ffffff",
         },
       });
 
@@ -65,22 +64,16 @@ const LoginPage = () => {
           </h1>
 
           {/* Login Component */}
-          {user ? (
-            <UserProfile user={user} />
-          ) : (
-            <>
-              <Login />
-              <div className="mt-4 text-center md:text-left">
-                <p className="text-sm text-gray-600">Don't have an account?</p>
-                <Link
-                  href="/signup"
-                  className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
-                >
-                  Sign Up
-                </Link>
-              </div>
-            </>
-          )}
+          <Login />
+          <div className="mt-4 text-center md:text-left">
+            <p className="text-sm text-gray-600">Don't have an account?</p>
+            <Link
+              href="/signup"
+              className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
+            >
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </div>

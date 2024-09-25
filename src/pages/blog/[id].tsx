@@ -37,9 +37,6 @@ const BlogPostPage = () => {
 
     const fetchBlogPost = async () => {
       try {
-        // Simulate a longer loading time for testing
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
         const response = await fetch(`/api/blog/${id}`);
         if (!response.ok) {
           if (response.status === 404) {

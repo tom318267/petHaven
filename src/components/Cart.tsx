@@ -4,7 +4,7 @@ import { removeFromCart, updateQuantity, clearCart } from "../store/cartSlice";
 import { RootState } from "../store";
 import { CartItem } from "../store/cartSlice";
 
-const Cart: React.FC = () => {
+const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 

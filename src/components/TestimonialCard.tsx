@@ -9,13 +9,13 @@ interface TestimonialCardProps {
   title: string;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
+const TestimonialCard = ({
   name,
   location,
   image,
   text,
   title,
-}) => {
+}: TestimonialCardProps) => {
   return (
     <div className="bg-[#E5F5FF] rounded-lg p-6 shadow-lg max-w-3xl mx-auto mb-8">
       <div className="flex items-center mb-4">

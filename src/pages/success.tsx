@@ -12,8 +12,6 @@ const SuccessPage: React.FC = () => {
   useEffect(() => {
     // Clear the cart after successful payment
     dispatch(clearCart());
-
-    // You can add additional logic here, like saving the order to your database
   }, [dispatch]);
 
   return (

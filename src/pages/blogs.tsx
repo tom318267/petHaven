@@ -33,9 +33,6 @@ const BlogsPage = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        // Simulate a longer loading time for testing
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
         const response = await fetch("/api/blogs");
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
