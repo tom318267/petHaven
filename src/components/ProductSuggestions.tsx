@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import { RootState } from "../store";
 import { toast } from "react-hot-toast";
+import Image from "next/image";
 
 interface Product {
   id: string;
@@ -19,6 +20,7 @@ const ProductSuggestions = () => {
   const user = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
+    const currentRef = sectionRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,13 +32,13 @@ const ProductSuggestions = () => {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -120,10 +122,11 @@ const ProductSuggestions = () => {
             >
               {/* Image */}
               <div className="flex justify-center flex-shrink-0">
-                <img
+                <Image
                   src={product.image}
                   alt="product image"
-                  className="h-48 w-48 object-cover"
+                  width={500}
+                  height={300}
                 />
               </div>
 

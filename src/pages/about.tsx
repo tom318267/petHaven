@@ -2,6 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const StatItem = ({ end, label }: { end: number | string; label: string }) => {
   const [ref, inView] = useInView({
@@ -38,9 +39,11 @@ const AboutUs = () => {
         <div className="flex flex-col md:flex-row items-center md:space-x-12">
           {/* Story Image */}
           <div className="md:w-1/2 mb-8 md:mb-0">
-            <img
+            <Image
               src="/images/doghug.jpg"
               alt="Cute dog at Pet Haven"
+              width={500}
+              height={300}
               className="rounded-lg shadow-lg object-cover w-full h-[400px]"
             />
           </div>
@@ -49,13 +52,14 @@ const AboutUs = () => {
           <div className="md:w-1/2 flex flex-col justify-center">
             <h1 className="text-5xl font-extrabold mb-8">About Pet Haven</h1>
             <p className="text-gray-700 text-lg mb-6">
-              Welcome to Pet Haven! We're a team of passionate pet lovers
+              Welcome to Pet Haven! We&apos;re a team of passionate pet lovers
               dedicated to making your life with your furry companions as joyful
               and stress-free as possible.
             </p>
             <p className="text-gray-700 text-lg">
-              Whether you're looking for top-notch pet supplies, expert advice,
-              or just a community that cares, you've come to the right place!
+              Whether you&apos;re looking for top-notch pet supplies, expert
+              advice, or just a community that cares, you&apos;ve come to the
+              right place!
             </p>
           </div>
         </div>
@@ -84,9 +88,11 @@ const AboutUs = () => {
 
           {/* Mission Image */}
           <div className="flex justify-center mt-12">
-            <img
+            <Image
               src="/images/doggroup.jpg"
               alt="Pets at Pet Haven"
+              width={500}
+              height={300}
               className="rounded-lg shadow-lg object-cover w-full md:w-3/4 h-80"
             />
           </div>
@@ -138,10 +144,12 @@ const AboutUs = () => {
               className="bg-white p-8 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
             >
               <div className="relative mb-6">
-                <img
+                <Image
                   src="https://randomuser.me/api/portraits/women/40.jpg"
                   alt="Sarah Smith"
-                  className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-400"
+                  width={128}
+                  height={128}
+                  className="rounded-full mx-auto object-cover border-4 border-blue-400"
                 />
                 <div className="absolute bottom-0 right-1/3 bg-yellow-400 rounded-full p-2">
                   <i className="fas fa-paw text-white"></i>
@@ -154,8 +162,8 @@ const AboutUs = () => {
                 Founder & Pet Expert
               </p>
               <p className="text-gray-700">
-                With over 15 years of experience, Sarah's love for pets drives
-                the heart of Pet Haven.
+                With over 15 years of experience, Sarah&apos;s love for pets
+                drives the heart of Pet Haven.
               </p>
             </motion.div>
 
@@ -167,10 +175,12 @@ const AboutUs = () => {
               className="bg-white p-8 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
             >
               <div className="relative mb-6">
-                <img
+                <Image
                   src="https://randomuser.me/api/portraits/men/22.jpg"
                   alt="John Speiser"
-                  className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-green-400"
+                  width={128}
+                  height={128}
+                  className="rounded-full mx-auto object-cover border-4 border-green-400"
                 />
                 <div className="absolute bottom-0 right-1/3 bg-green-400 rounded-full p-2">
                   <i className="fas fa-cog text-white"></i>
@@ -196,10 +206,12 @@ const AboutUs = () => {
               className="bg-white p-8 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
             >
               <div className="relative mb-6">
-                <img
+                <Image
                   src="https://randomuser.me/api/portraits/women/8.jpg"
                   alt="Emily Johnson"
-                  className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-purple-400"
+                  width={128}
+                  height={128}
+                  className="rounded-full mx-auto object-cover border-4 border-purple-400"
                 />
                 <div className="absolute bottom-0 right-1/3 bg-purple-400 rounded-full p-2">
                   <i className="fas fa-apple-alt text-white"></i>

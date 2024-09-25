@@ -31,6 +31,10 @@ jest.mock("@/components/Newsletter", () => () => (
   <div data-testid="newsletter">Newsletter</div>
 ));
 
+// Add display names to components
+const MockComponent = () => <div>Mock Component</div>;
+MockComponent.displayName = "MockComponent";
+
 describe("Home component", () => {
   it("renders without crashing", () => {
     render(<Home />);
