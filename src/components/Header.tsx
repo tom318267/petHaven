@@ -40,16 +40,15 @@ const Header = () => {
         isHomePage ? "" : "shadow-sm"
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex justify-between items-center px-4">
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
           <Image
-            src="/images/doglogo.svg"
+            src="/images/doglogo3.svg"
             alt="PetHaven Logo"
-            width={40}
-            height={40}
+            width={190}
+            height={190}
           />
-          <span className="text-2xl font-bold text-black">PetHaven</span>
         </div>
 
         {/* Hamburger Menu Button (visible on mobile) */}
