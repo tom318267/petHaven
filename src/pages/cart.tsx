@@ -112,29 +112,58 @@ const CartPage: React.FC = () => {
                   </thead>
                   <tbody>
                     {cartItems.map((item) => (
-                      <tr key={item.id} className="border-b block sm:table-row">
-                        <td className="px-4 py-4 flex items-center justify-between sm:table-cell">
-                          <div className="flex items-center">
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              width={50}
-                              height={50}
-                              className="mr-4 object-cover"
-                            />
-                            <span className="text-sm sm:text-base">
-                              {item.name}
+                      <tr
+                        key={item.id}
+                        className="block sm:table-row border-b border-gray-200 sm:border-b"
+                      >
+                        <td className="p-4 sm:p-4 flex flex-col sm:table-cell sm:align-middle">
+                          <div className="flex items-center justify-between mb-2 sm:mb-0">
+                            <div className="flex items-center">
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                width={50}
+                                height={50}
+                                className="mr-4 object-cover"
+                              />
+                              <span className="text-sm sm:text-base font-medium">
+                                {item.name}
+                              </span>
+                            </div>
+                            <span className="sm:hidden text-sm font-semibold">
+                              ${item.price.toFixed(2)}
                             </span>
                           </div>
-                          <span className="sm:hidden text-sm font-semibold">
-                            ${item.price.toFixed(2)}
-                          </span>
+                          <div className="flex justify-between items-center sm:hidden mt-2">
+                            <div className="flex items-center">
+                              <span className="text-sm mr-2">Qty:</span>
+                              <input
+                                type="number"
+                                min="1"
+                                value={item.quantity}
+                                onChange={(e) =>
+                                  dispatch(
+                                    updateQuantity({
+                                      id: item.id.toString(),
+                                      quantity: Math.max(
+                                        1,
+                                        parseInt(e.target.value) || 0
+                                      ),
+                                    })
+                                  )
+                                }
+                                className="w-16 px-2 py-1 border rounded text-sm"
+                              />
+                            </div>
+                            <span className="text-sm font-semibold">
+                              Total: ${(item.price * item.quantity).toFixed(2)}
+                            </span>
+                          </div>
                         </td>
-                        <td className="px-4 py-4 text-sm sm:text-base hidden sm:table-cell">
+                        <td className="hidden sm:table-cell px-4 py-4 text-sm sm:text-base">
                           ${item.price.toFixed(2)}
                         </td>
-                        <td className="px-4 py-4 flex justify-between items-center sm:table-cell">
-                          <span className="sm:hidden text-sm">Quantity:</span>
+                        <td className="hidden sm:table-cell px-4 py-4">
                           <input
                             type="number"
                             min="1"
@@ -153,9 +182,8 @@ const CartPage: React.FC = () => {
                             className="w-16 px-2 py-1 border rounded text-sm sm:text-base"
                           />
                         </td>
-                        <td className="px-4 py-4 text-sm sm:text-base flex justify-between items-center sm:table-cell">
-                          <span className="sm:hidden">Total:</span>$
-                          {(item.price * item.quantity).toFixed(2)}
+                        <td className="hidden sm:table-cell px-4 py-4 text-sm sm:text-base">
+                          ${(item.price * item.quantity).toFixed(2)}
                         </td>
                         <td className="px-4 py-4 text-right sm:text-left">
                           <button
