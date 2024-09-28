@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import WhyChooseUs from "@/components/WhoChooseUs";
 import { useInView } from "react-intersection-observer";
 import Newsletter from "@/components/Newsletter";
+import { FaDog, FaCat, FaPaw, FaEnvelope } from "react-icons/fa";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 

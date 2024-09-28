@@ -16,7 +16,7 @@ const config: Config = {
         urbanist: ["var(--font-urbanist)", "sans-serif"],
       },
       colors: {
-        primary: "#4A90E2",
+        primary: "#2463EB",
         secondary: "#1ABC9C",
         background: "#F8F9FA",
         text: "#333333",

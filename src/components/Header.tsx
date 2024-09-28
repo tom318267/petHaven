@@ -34,6 +34,11 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLinkClick = (href: string) => {
+    router.push(href);
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav
       className={`bg-white py-4 pt-6 text-black relative ${
@@ -57,6 +62,7 @@ const Header = () => {
             href="/cart"
             className="p-3 text-[#E65000] hover:text-[#CC4700] transition-colors"
             aria-label="Shopping Cart"
+            onClick={() => handleLinkClick("/cart")}
           >
             <div className="relative">
               <FaShoppingCart size={24} />
@@ -86,30 +92,34 @@ const Header = () => {
             <Link
               href="/"
               className="font-medium text-lg hover:text-black relative group"
+              onClick={() => handleLinkClick("/")}
             >
               Home
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-primary transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
             <Link
               href="/products"
               className="font-medium text-lg hover:text-black relative group"
+              onClick={() => handleLinkClick("/products")}
             >
               Products
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-primary transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
             <Link
               href="/blogs"
               className="font-medium text-lg hover:text-black relative group"
+              onClick={() => handleLinkClick("/blogs")}
             >
               Blogs
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-primary transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
             <Link
               href="/contact"
               className="font-medium text-lg hover:text-black relative group"
+              onClick={() => handleLinkClick("/contact")}
             >
               Contact
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-primary transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
 
             {/* Auth Buttons - now part of the mobile menu */}
@@ -129,12 +139,14 @@ const Header = () => {
                 <Link
                   href="/login"
                   className="block px-4 py-2 bg-[#E65000] text-white rounded-lg hover:bg-[#CC4700] transition duration-300 ease-in-out text-lg font-medium"
+                  onClick={() => handleLinkClick("/login")}
                 >
                   Log In
                 </Link>
                 <Link
                   href="/signup"
                   className="block px-4 py-2 border border-[#E65000] text-[#E65000] rounded-lg hover:bg-[#FFDACC] transition duration-300 ease-in-out text-lg font-medium"
+                  onClick={() => handleLinkClick("/signup")}
                 >
                   Sign Up
                 </Link>
@@ -153,7 +165,7 @@ const Header = () => {
             <div className="relative">
               <FaShoppingCart size={24} />
               {cartItemCount > 0 && (
-                <span className="absolute -top-3 -right-3 bg-[#E65000] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                <span className="absolute -top-3 -right-3 bg-[#004085] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   {cartItemCount}
                 </span>
               )}

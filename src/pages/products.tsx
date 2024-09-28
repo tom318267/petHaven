@@ -172,17 +172,17 @@ const ProductsPage = () => {
         </section>
       ) : (
         <section className="products-page min-h-screen bg-[#E5F5FF]">
-          <div className="container mx-auto px-4 py-24">
+          <div className="container mx-auto px-4 py-12 sm:py-24">
             {error ? (
               <div className="text-red-500 text-center text-xl">{error}</div>
             ) : (
               <>
-                <section className="page-header text-center mb-12">
+                <section className="page-header text-center mb-8 sm:mb-12">
                   <motion.h1
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-5xl font-extrabold mb-8"
+                    className="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-8"
                   >
                     Our Products
                   </motion.h1>
@@ -190,7 +190,7 @@ const ProductsPage = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-gray-600 max-w-4xl mx-auto text-lg mt-4"
+                    className="text-gray-600 max-w-4xl mx-auto text-base sm:text-lg mt-2 sm:mt-4"
                   >
                     Discover our wide range of high-quality pet products. From
                     nutritious food to comfortable accessories, we offer
@@ -200,8 +200,8 @@ const ProductsPage = () => {
                     their size, breed, or preferences.
                   </motion.p>
                 </section>
-                <section className="product-filters mb-8 flex justify-between items-center">
-                  <div className="sort-filter relative">
+                <section className="product-filters mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+                  <div className="sort-filter relative w-full sm:w-auto">
                     <label
                       htmlFor="sort-select"
                       className="block text-sm font-medium text-gray-700 mb-2"
@@ -213,7 +213,7 @@ const ProductsPage = () => {
                         id="sort-select"
                         value={sortOption}
                         onChange={handleSortChange}
-                        className="block appearance-none w-48 bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                        className="block appearance-none w-full sm:w-48 bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
                       >
                         <option value="default">Default</option>
                         <option value="price-asc">Price: Low to High</option>
@@ -226,7 +226,7 @@ const ProductsPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="category-filter relative">
+                  <div className="category-filter relative w-full sm:w-auto">
                     <label
                       htmlFor="category-select"
                       className="block text-sm font-medium text-gray-700 mb-2"
@@ -238,7 +238,7 @@ const ProductsPage = () => {
                         id="category-select"
                         value={selectedCategory}
                         onChange={handleCategoryChange}
-                        className="block appearance-none w-64 bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-10 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                        className="block appearance-none w-full sm:w-64 bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-10 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
                       >
                         {categories.map((category) => (
                           <option key={category} value={category}>
@@ -259,7 +259,7 @@ const ProductsPage = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4 pb-16"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                   >
                     {filteredProducts.map((product) => (
                       <motion.article
