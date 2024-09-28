@@ -27,7 +27,7 @@ const LogoutButton = () => {
         duration: 3000,
         position: "bottom-right",
         style: {
-          background: "#4CB944",
+          background: "#2463EB",
           color: "#ffffff",
         },
       });

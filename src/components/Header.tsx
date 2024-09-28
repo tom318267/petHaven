@@ -47,14 +47,14 @@ const Header = () => {
     >
       <div className="container mx-auto flex justify-between items-center px-4">
         {/* Logo Section */}
-        <div className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           <Image
             src="/images/doglogo3.svg"
             alt="PetHaven Logo"
             width={190}
             height={190}
           />
-        </div>
+        </Link>
 
         {/* Hamburger Menu Button (visible on mobile) */}
         <div className="md:hidden flex items-center space-x-4">
@@ -67,7 +67,7 @@ const Header = () => {
             <div className="relative">
               <FaShoppingCart size={24} />
               {cartItemCount > 0 && (
-                <span className="absolute -top-3 -right-3 bg-[#E65000] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                <span className="absolute -top-3 -right-3 bg-[#004085] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   {cartItemCount}
                 </span>
               )}

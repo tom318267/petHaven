@@ -70,7 +70,7 @@ const CartPage: React.FC = () => {
       duration: 3000,
       position: "bottom-right",
       style: {
-        background: "#4CB944", // Green background
+        background: "#2463EB", // Blue background
         color: "#ffffff", // White text
       },
     });
@@ -101,7 +101,7 @@ const CartPage: React.FC = () => {
             <div className="bg-white shadow-md rounded-lg overflow-hidden my-8">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-blue-600 text-white">
+                  <thead className="bg-blue-600 text-white hidden sm:table-header-group">
                     <tr>
                       <th className="px-4 py-3 text-left">Product</th>
                       <th className="px-4 py-3 text-left">Price</th>
@@ -112,8 +112,8 @@ const CartPage: React.FC = () => {
                   </thead>
                   <tbody>
                     {cartItems.map((item) => (
-                      <tr key={item.id} className="border-b">
-                        <td className="px-4 py-4">
+                      <tr key={item.id} className="border-b block sm:table-row">
+                        <td className="px-4 py-4 flex items-center justify-between sm:table-cell">
                           <div className="flex items-center">
                             <Image
                               src={item.image}
@@ -126,11 +126,15 @@ const CartPage: React.FC = () => {
                               {item.name}
                             </span>
                           </div>
+                          <span className="sm:hidden text-sm font-semibold">
+                            ${item.price.toFixed(2)}
+                          </span>
                         </td>
-                        <td className="px-4 py-4 text-sm sm:text-base">
+                        <td className="px-4 py-4 text-sm sm:text-base hidden sm:table-cell">
                           ${item.price.toFixed(2)}
                         </td>
-                        <td className="px-4 py-4">
+                        <td className="px-4 py-4 flex justify-between items-center sm:table-cell">
+                          <span className="sm:hidden text-sm">Quantity:</span>
                           <input
                             type="number"
                             min="1"
@@ -149,10 +153,11 @@ const CartPage: React.FC = () => {
                             className="w-16 px-2 py-1 border rounded text-sm sm:text-base"
                           />
                         </td>
-                        <td className="px-4 py-4 text-sm sm:text-base">
-                          ${(item.price * item.quantity).toFixed(2)}
+                        <td className="px-4 py-4 text-sm sm:text-base flex justify-between items-center sm:table-cell">
+                          <span className="sm:hidden">Total:</span>$
+                          {(item.price * item.quantity).toFixed(2)}
                         </td>
-                        <td className="px-4 py-4">
+                        <td className="px-4 py-4 text-right sm:text-left">
                           <button
                             onClick={() =>
                               handleRemoveFromCart(item.id.toString())
