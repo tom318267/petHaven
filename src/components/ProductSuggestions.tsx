@@ -95,6 +95,10 @@ const ProductSuggestions = () => {
         background: "#2463EB",
         color: "#ffffff",
       },
+      iconTheme: {
+        primary: "#ffffff",
+        secondary: "#2463EB",
+      },
     });
   };
 
