@@ -8,6 +8,7 @@ import { auth } from "../firebase/config";
 import Signup from "../components/Signup";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
+import { toastOptions } from "../components/GlobalToaster";
 
 const SignupPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -15,11 +16,27 @@ const SignupPage = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Clear any existing toasts when the signup page loads
+    toast.dismiss();
+
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       dispatch(setUser(authUser));
     });
-    return () => unsubscribe();
-  }, [dispatch]);
+
+    // Set up a route change start listener
+    const handleRouteChangeStart = () => {
+      toast.dismiss();
+    };
+
+    // Add the listener
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+
+    // Clean up
+    return () => {
+      unsubscribe();
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+    };
+  }, [dispatch, router]);
 
   useEffect(() => {
     if (user) {
@@ -33,18 +50,7 @@ const SignupPage = () => {
         funMessages[Math.floor(Math.random() * funMessages.length)];
 
       // Show the toast immediately with green background
-      toast.success(randomMessage, {
-        duration: 3000,
-        position: "bottom-right",
-        style: {
-          background: "#2463EB",
-          color: "#ffffff",
-        },
-        iconTheme: {
-          primary: "#ffffff",
-          secondary: "#2463EB",
-        },
-      });
+      toast.success(randomMessage, toastOptions);
 
       // Delay the redirection
       setTimeout(() => {

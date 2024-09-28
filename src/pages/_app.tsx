@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import "../styles/globals.css";
 import { Urbanist } from "@next/font/google";
 import { initializeCart } from "../store/cartSlice";
+import GlobalToaster from "../components/GlobalToaster";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Toaster } from "react-hot-toast";
@@ -23,8 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
-        <ToastContainer />
-        <Toaster position="bottom-right" />
+        <GlobalToaster />
       </main>
     </Provider>
   );

@@ -1,11 +1,13 @@
 import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { RootState } from "../store";
 import { removeFromCart, updateQuantity, setCart } from "../store/cartSlice";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import { toastOptions } from "../components/GlobalToaster";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -14,8 +16,12 @@ const stripePromise = loadStripe(
 const CartPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
+    // Clear any existing toasts when the cart page loads
+    toast.dismiss();
+
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
@@ -23,7 +29,20 @@ const CartPage: React.FC = () => {
         dispatch(setCart(parsedCart.items));
       }
     }
-  }, [dispatch]);
+
+    // Set up a route change start listener
+    const handleRouteChangeStart = () => {
+      toast.dismiss();
+    };
+
+    // Add the listener
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+
+    // Clean up
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+    };
+  }, [dispatch, router]);
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -64,21 +83,13 @@ const CartPage: React.FC = () => {
     }
   };
 
-  const handleRemoveFromCart = (itemId: string) => {
-    dispatch(removeFromCart(itemId));
-    toast.success("Item removed from cart", {
-      duration: 3000,
-      position: "bottom-right",
-      style: {
-        background: "#2463EB",
-        color: "#ffffff",
-      },
-      iconTheme: {
-        primary: "#ffffff",
-        secondary: "#2463EB",
-      },
-    });
-  };
+  const handleRemoveFromCart = useCallback(
+    (itemId: string) => {
+      dispatch(removeFromCart(itemId));
+      toast.success("Item removed from cart", toastOptions);
+    },
+    [dispatch]
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -219,7 +230,6 @@ const CartPage: React.FC = () => {
           </>
         )}
       </div>
-      <Toaster />
     </div>
   );
 };

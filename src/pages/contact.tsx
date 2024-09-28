@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import { toastOptions } from "../components/GlobalToaster";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,26 @@ const ContactPage = () => {
     email: "",
     message: "",
   });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Clear any existing toasts when the contact page loads
+    toast.dismiss();
+
+    // Set up a route change start listener
+    const handleRouteChangeStart = () => {
+      toast.dismiss();
+    };
+
+    // Add the listener
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+    };
+  }, [router]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -27,57 +49,19 @@ const ContactPage = () => {
       });
 
       if (response.ok) {
-        toast.success("Message sent successfully!", {
-          style: {
-            background: "#3b82f6",
-            color: "#ffffff",
-          },
-          iconTheme: {
-            primary: "#ffffff",
-            secondary: "#3b82f6",
-          },
-        });
+        toast.success("Message sent successfully!", toastOptions);
         setFormData({ name: "", email: "", message: "" }); // Reset form
       } else {
-        toast.error("Failed to send message. Please try again.", {
-          style: {
-            background: "#3b82f6",
-            color: "#ffffff",
-          },
-          iconTheme: {
-            primary: "#ffffff",
-            secondary: "#3b82f6",
-          },
-        });
+        toast.error("Failed to send message. Please try again.", toastOptions);
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("An error occurred. Please try again.", {
-        style: {
-          background: "#3b82f6",
-          color: "#ffffff",
-        },
-        iconTheme: {
-          primary: "#ffffff",
-          secondary: "#3b82f6",
-        },
-      });
+      toast.error("An error occurred. Please try again.", toastOptions);
     }
   };
 
   return (
     <div className="bg-[#E5F5FF] min-h-screen py-16">
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-        toastOptions={{
-          duration: 5000,
-          style: {
-            background: "#3b82f6",
-            color: "#ffffff",
-          },
-        }}
-      />
       <div className="container mx-auto px-4">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
@@ -102,7 +86,7 @@ const ContactPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md" // Updated max-width
+          className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md"
         >
           <div className="mb-6">
             <label

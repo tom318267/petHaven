@@ -9,6 +9,7 @@ import { addToCart } from "../store/cartSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Toaster, toast, ToastOptions } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 interface Product {
   _id: string;
@@ -39,6 +40,7 @@ const ProductsPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState("default");
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -157,6 +159,26 @@ const ProductsPage = () => {
       primary: "#ffffff",
       secondary: "#2463EB",
     },
+  };
+
+  const handleAddToCart = (product: Product) => {
+    console.log("Adding to cart:", {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    });
+    dispatch(
+      addToCart({
+        id: product._id,
+        name: product.name,
+        price: product.price,
+        userId: user?.name || "guest",
+        image: product.image,
+      })
+    );
+    // Show the toast notification
+    toast.success(`${product.name} added to cart!`, toastOptions);
   };
 
   return (
@@ -296,28 +318,7 @@ const ProductsPage = () => {
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              onClick={() => {
-                                console.log("Adding to cart:", {
-                                  id: product._id,
-                                  name: product.name,
-                                  price: product.price,
-                                  image: product.image,
-                                });
-                                dispatch(
-                                  addToCart({
-                                    id: product._id,
-                                    name: product.name,
-                                    price: product.price,
-                                    userId: user?.name || "guest",
-                                    image: product.image,
-                                  })
-                                );
-                                // Update the toast notification
-                                toast.success(
-                                  `${product.name} added to cart!`,
-                                  toastOptions
-                                );
-                              }}
+                              onClick={() => handleAddToCart(product)}
                               className="bg-[#E65000] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#CC4700] transition shadow-md"
                             >
                               Add to Cart

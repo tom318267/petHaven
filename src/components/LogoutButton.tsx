@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { setUser } from "../store/authSlice";
 import { FaSignOutAlt } from "react-icons/fa"; // Import the icon
 import { toast } from "react-hot-toast";
+import { toastOptions } from "./GlobalToaster";
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -23,26 +24,14 @@ const LogoutButton = () => {
       const randomMessage =
         funMessages[Math.floor(Math.random() * funMessages.length)];
 
-      toast.success(randomMessage, {
-        duration: 3000,
-        position: "bottom-right",
-        style: {
-          background: "#2463EB",
-          color: "#ffffff",
-        },
-        iconTheme: {
-          primary: "#ffffff",
-          secondary: "#2463EB",
-        },
-      });
+      toast.success(randomMessage, toastOptions);
     } catch (error) {
       console.error("Error signing out: ", error);
       toast.error("Oops! Logout failed. Please try again.", {
-        duration: 3000,
-        position: "bottom-right",
+        ...toastOptions,
         style: {
+          ...toastOptions.style,
           background: "#FF4B4B",
-          color: "#ffffff",
         },
       });
     }

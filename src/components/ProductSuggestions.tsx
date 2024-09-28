@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import { RootState } from "../store";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { toastOptions } from "./GlobalToaster";
 
 interface Product {
   id: string;
@@ -18,8 +20,12 @@ const ProductSuggestions = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
+  const router = useRouter();
 
   useEffect(() => {
+    // Clear any existing toasts when the component mounts
+    toast.dismiss();
+
     const currentRef = sectionRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -36,12 +42,22 @@ const ProductSuggestions = () => {
       observer.observe(currentRef);
     }
 
+    // Set up a route change start listener
+    const handleRouteChangeStart = () => {
+      toast.dismiss();
+    };
+
+    // Add the listener
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+
     return () => {
       if (currentRef) {
         observer.unobserve(currentRef);
       }
+      // Remove the listener
+      router.events.off("routeChangeStart", handleRouteChangeStart);
     };
-  }, []);
+  }, [router]);
 
   const products: Product[] = [
     {
@@ -76,31 +92,23 @@ const ProductSuggestions = () => {
     return words.slice(0, wordCount).join(" ") + "...";
   };
 
-  const handleAddToCart = (product: Product) => {
-    dispatch(
-      addToCart({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        userId: user?.name || "guest",
-      })
-    );
+  const handleAddToCart = useCallback(
+    (product: Product) => {
+      dispatch(
+        addToCart({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          userId: user?.name || "guest",
+        })
+      );
 
-    // Add toast notification
-    toast.success(`${product.name} added to cart!`, {
-      duration: 3000,
-      position: "bottom-right",
-      style: {
-        background: "#2463EB",
-        color: "#ffffff",
-      },
-      iconTheme: {
-        primary: "#ffffff",
-        secondary: "#2463EB",
-      },
-    });
-  };
+      // Add toast notification
+      toast.success(`${product.name} added to cart!`, toastOptions);
+    },
+    [dispatch, user]
+  );
 
   return (
     <section
