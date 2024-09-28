@@ -78,8 +78,10 @@ const CartPage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow container mx-auto px-4 py-24 flex flex-col">
-        <h1 className="text-5xl font-extrabold text-center mb-6">Your Cart</h1>
+      <div className="flex-grow container mx-auto px-4 py-8 sm:py-24 flex flex-col">
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-center mb-6">
+          Your Cart
+        </h1>
         {cartItems.length === 0 ? (
           <div className="flex-grow flex flex-col items-center justify-center">
             <Image
@@ -97,66 +99,74 @@ const CartPage: React.FC = () => {
         ) : (
           <>
             <div className="bg-white shadow-md rounded-lg overflow-hidden my-8">
-              <table className="w-full">
-                <thead className="bg-blue-600 text-white">
-                  <tr>
-                    <th className="px-6 py-3 text-left">Product</th>
-                    <th className="px-6 py-3 text-left">Price</th>
-                    <th className="px-6 py-3 text-left">Quantity</th>
-                    <th className="px-6 py-3 text-left">Total</th>
-                    <th className="px-6 py-3"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item) => (
-                    <tr key={item.id} className="border-b">
-                      <td className="px-6 py-4 flex items-center">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          width={50}
-                          height={50}
-                          className="mr-4 object-cover"
-                        />
-                        <span>{item.name}</span>
-                      </td>
-                      <td className="px-6 py-4">${item.price.toFixed(2)}</td>
-                      <td className="px-6 py-4">
-                        <input
-                          type="number"
-                          min="1"
-                          value={item.quantity}
-                          onChange={(e) =>
-                            dispatch(
-                              updateQuantity({
-                                id: item.id.toString(),
-                                quantity: Math.max(
-                                  1,
-                                  parseInt(e.target.value) || 0
-                                ),
-                              })
-                            )
-                          }
-                          className="w-16 px-2 py-1 border rounded"
-                        />
-                      </td>
-                      <td className="px-6 py-4">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </td>
-                      <td className="px-6 py-4">
-                        <button
-                          onClick={() =>
-                            handleRemoveFromCart(item.id.toString())
-                          }
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          Remove
-                        </button>
-                      </td>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-blue-600 text-white">
+                    <tr>
+                      <th className="px-4 py-3 text-left">Product</th>
+                      <th className="px-4 py-3 text-left">Price</th>
+                      <th className="px-4 py-3 text-left">Quantity</th>
+                      <th className="px-4 py-3 text-left">Total</th>
+                      <th className="px-4 py-3"></th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {cartItems.map((item) => (
+                      <tr key={item.id} className="border-b">
+                        <td className="px-4 py-4">
+                          <div className="flex items-center">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              width={50}
+                              height={50}
+                              className="mr-4 object-cover"
+                            />
+                            <span className="text-sm sm:text-base">
+                              {item.name}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 text-sm sm:text-base">
+                          ${item.price.toFixed(2)}
+                        </td>
+                        <td className="px-4 py-4">
+                          <input
+                            type="number"
+                            min="1"
+                            value={item.quantity}
+                            onChange={(e) =>
+                              dispatch(
+                                updateQuantity({
+                                  id: item.id.toString(),
+                                  quantity: Math.max(
+                                    1,
+                                    parseInt(e.target.value) || 0
+                                  ),
+                                })
+                              )
+                            }
+                            className="w-16 px-2 py-1 border rounded text-sm sm:text-base"
+                          />
+                        </td>
+                        <td className="px-4 py-4 text-sm sm:text-base">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </td>
+                        <td className="px-4 py-4">
+                          <button
+                            onClick={() =>
+                              handleRemoveFromCart(item.id.toString())
+                            }
+                            className="text-red-600 hover:text-red-800 text-sm sm:text-base"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div className="mt-8 text-right">
               <p className="text-xl font-semibold mb-4">
@@ -172,6 +182,7 @@ const CartPage: React.FC = () => {
           </>
         )}
       </div>
+      <Toaster />
     </div>
   );
 };
