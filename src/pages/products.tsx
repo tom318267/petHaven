@@ -163,13 +163,13 @@ const ProductsPage = () => {
     <AnimatePresence mode="wait">
       <Toaster position="bottom-right" toastOptions={toastOptions} />
       {isLoading || showLoader ? (
-        <section className="loading-section flex flex-col justify-center items-center h-screen">
+        <section className="loading-section flex flex-col justify-start sm:justify-center items-center h-screen pt-16 sm:pt-0">
           <PawPrintLoader />
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-4 text-xl text-gray-600"
+            className="mt-4 text-lg sm:text-xl text-gray-600"
           >
             Fetching products...
           </motion.p>

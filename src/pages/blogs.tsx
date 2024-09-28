@@ -108,7 +108,7 @@ const BlogsPage = () => {
           exit={{ opacity: 0 }}
           className="min-h-screen bg-[#E5F5FF]"
         >
-          <div className="container mx-auto px-4 py-24">
+          <div className="container mx-auto px-4 py-12 sm:py-24">
             {error ? (
               <div className="text-red-500 text-center text-xl">{error}</div>
             ) : (
@@ -117,7 +117,7 @@ const BlogsPage = () => {
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-5xl font-extrabold text-center mb-6"
+                  className="text-3xl sm:text-5xl font-extrabold text-center mb-6 sm:mb-8"
                 >
                   Our Blogs
                 </motion.h1>
@@ -125,7 +125,7 @@ const BlogsPage = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-center text-gray-600 mb-12 max-w-4xl mx-auto text-lg"
+                  className="text-center text-gray-600 mb-8 sm:mb-12 max-w-4xl mx-auto text-base sm:text-lg"
                 >
                   Stay informed and inspired with our latest articles on pet
                   care, health tips, and heartwarming stories. Our blog is your

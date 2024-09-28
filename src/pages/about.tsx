@@ -110,7 +110,7 @@ const AboutUs = () => {
           <h2 className="text-4xl text-center font-bold mb-12">
             Fun Pet Stats
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <StatItem end={5000} label="Happy Pets Served" />
             <StatItem end={1200} label="Pet Products Sold" />
             <StatItem end={24} label="Hours of Support Daily" />
@@ -124,26 +124,26 @@ const AboutUs = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="p-24 bg-gradient-to-br bg-[#E5F5FF]"
+        className="py-12 px-4 sm:p-16 md:p-24 bg-gradient-to-br bg-[#E5F5FF]"
       >
-        <div className="container mx-auto px-8">
+        <div className="container mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl text-center font-bold text-blue-600 mb-16"
+            className="text-3xl sm:text-4xl text-center font-bold text-blue-600 mb-8 sm:mb-16"
           >
             Meet Our Pawsome Team
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-md mx-auto sm:max-w-none">
             {/* Team Member 1 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white p-8 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
+              className="bg-white p-6 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
             >
-              <div className="relative mb-6">
+              <div className="relative mb-4">
                 <Image
                   src="https://randomuser.me/api/portraits/women/40.jpg"
                   alt="Sarah Smith"
@@ -155,13 +155,13 @@ const AboutUs = () => {
                   <i className="fas fa-paw text-white"></i>
                 </div>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 Sarah Smith
               </h3>
               <p className="text-blue-600 font-medium mb-4">
                 Founder & Pet Expert
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 With over 15 years of experience, Sarah&apos;s love for pets
                 drives the heart of Pet Haven.
               </p>
@@ -172,9 +172,9 @@ const AboutUs = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white p-8 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
+              className="bg-white p-6 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
             >
-              <div className="relative mb-6">
+              <div className="relative mb-4">
                 <Image
                   src="https://randomuser.me/api/portraits/men/22.jpg"
                   alt="John Speiser"
@@ -186,13 +186,13 @@ const AboutUs = () => {
                   <i className="fas fa-cog text-white"></i>
                 </div>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 John Speiser
               </h3>
               <p className="text-green-600 font-medium mb-4">
                 Operations Manager
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 John ensures everything runs smoothly, from operations to
                 customer support.
               </p>
@@ -203,9 +203,9 @@ const AboutUs = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white p-8 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
+              className="bg-white p-6 rounded-2xl shadow-lg text-center transform transition duration-300 hover:scale-105"
             >
-              <div className="relative mb-6">
+              <div className="relative mb-4">
                 <Image
                   src="https://randomuser.me/api/portraits/women/8.jpg"
                   alt="Emily Johnson"
@@ -217,13 +217,13 @@ const AboutUs = () => {
                   <i className="fas fa-apple-alt text-white"></i>
                 </div>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 Emily Johnson
               </h3>
               <p className="text-purple-600 font-medium mb-4">
                 Pet Nutritionist
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-sm">
                 Emily ensures your pet gets the best nutrition, carefully
                 selecting the healthiest options.
               </p>
