@@ -95,7 +95,7 @@ const Home = (): JSX.Element => {
     >
       <main>
         {/* Full-width Hero Section */}
-        <div className="relative w-full min-h-[700px] lg:min-h-[900px] mb-16">
+        <section className="relative w-full min-h-[700px] lg:min-h-[900px] mb-16">
           {/* Background Image */}
           <div className="absolute inset-0 overflow-hidden">
             <Image
@@ -133,7 +133,7 @@ const Home = (): JSX.Element => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
+                    className="bg-[#E65000] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#CC4700] transition shadow-md"
                     onClick={() => router.push("/products")}
                   >
                     Shop Now
@@ -141,7 +141,7 @@ const Home = (): JSX.Element => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-white text-black py-3 px-6 rounded-lg font-medium hover:bg-yellow-300 transition flex items-center space-x-2 shadow-md"
+                    className="bg-white text-[#E65000] py-3 px-6 rounded-lg font-medium hover:bg-[#FFDACC] transition flex items-center space-x-2 shadow-md border border-[#E65000]"
                     onClick={() => router.push("/about")}
                   >
                     <span>Learn More</span>
@@ -169,12 +169,12 @@ const Home = (): JSX.Element => {
               </motion.div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Content sections */}
         <div className="container mx-auto px-4">
           <div className="flex flex-col space-y-16 mb-16">
-            <motion.div
+            <motion.section
               ref={productRef}
               initial="hidden"
               animate={productControls}
@@ -182,8 +182,8 @@ const Home = (): JSX.Element => {
               className="bg-white rounded-lg"
             >
               <ProductSuggestions />
-            </motion.div>
-            <motion.div
+            </motion.section>
+            <motion.section
               ref={whyChooseUsRef}
               initial="hidden"
               animate={whyChooseUsControls}
@@ -191,8 +191,8 @@ const Home = (): JSX.Element => {
               className="bg-white rounded-lg"
             >
               <WhyChooseUs />
-            </motion.div>
-            <motion.div
+            </motion.section>
+            <motion.section
               ref={testimonialRef}
               initial="hidden"
               animate={testimonialControls}
@@ -200,8 +200,8 @@ const Home = (): JSX.Element => {
               className="bg-white rounded-lg"
             >
               <Testimonials />
-            </motion.div>
-            <motion.div
+            </motion.section>
+            <motion.section
               ref={newsletterRef}
               initial="hidden"
               animate={newsletterControls}
@@ -209,7 +209,7 @@ const Home = (): JSX.Element => {
               className="bg-white rounded-lg"
             >
               <Newsletter />
-            </motion.div>
+            </motion.section>
           </div>
         </div>
       </main>

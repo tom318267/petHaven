@@ -37,7 +37,7 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <div className="py-16">
+    <div className="py-12">
       <div className="container mx-auto px-4">
         <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           We love hearing from our customers

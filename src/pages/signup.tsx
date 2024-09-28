@@ -6,7 +6,8 @@ import { RootState } from "../store";
 import { setUser } from "../store/authSlice";
 import { auth } from "../firebase/config";
 import Signup from "../components/Signup";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import Image from "next/image";
 
 const SignupPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -49,9 +50,9 @@ const SignupPage = () => {
   }, [user, router]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <section className="min-h-screen flex flex-col md:flex-row">
       {/* Left Column - Form Section */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
+      <section className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
         <div className="w-full max-w-md">
           <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-gray-800 text-center md:text-left">
             Sign Up
@@ -60,23 +61,29 @@ const SignupPage = () => {
           {/* Signup Component */}
           <Signup />
           <div className="mt-4 text-center md:text-left">
-            <p className="text-sm text-gray-600">Already have an account?</p>
-            <Link
-              href="/login"
-              className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300"
-            >
-              Log In
-            </Link>
+            <p>
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300 font-medium"
+              >
+                Log in
+              </Link>
+            </p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Right Column - Image Background (hidden on mobile) */}
-      <div
-        className="hidden md:block w-full md:w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/signupcat.jpg')" }}
-      ></div>
-    </div>
+      <section className="hidden md:block w-full md:w-1/2 relative">
+        <Image
+          src="/images/signupcat.jpg"
+          alt="Signup cat background"
+          layout="fill"
+          objectFit="cover"
+        />
+      </section>
+    </section>
   );
 };
 

@@ -14,7 +14,10 @@ const Cart = () => {
       {cartItems.map((item: CartItem) => (
         <div key={item.id}>
           {item.name} - Quantity: {item.quantity}
-          <button onClick={() => dispatch(removeFromCart(item.id.toString()))}>
+          <button
+            onClick={() => dispatch(removeFromCart(item.id.toString()))}
+            className="bg-blue-800 text-white px-2 py-1 rounded ml-2 hover:bg-blue-700"
+          >
             Remove
           </button>
           <input
@@ -28,10 +31,16 @@ const Cart = () => {
                 })
               )
             }
+            className="ml-2 w-16 px-2 py-1 border rounded"
           />
         </div>
       ))}
-      <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
+      <button
+        onClick={() => dispatch(clearCart())}
+        className="bg-blue-800 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700"
+      >
+        Clear Cart
+      </button>
     </div>
   );
 };

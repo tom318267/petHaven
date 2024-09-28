@@ -49,15 +49,15 @@ const LoginPage = () => {
   }, [user, router]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <section className="min-h-screen flex flex-col md:flex-row">
       {/* Left Column - Image Background (hidden on mobile) */}
-      <div
+      <section
         className="hidden md:block w-full md:w-1/2 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/dogbeach.jpg')" }}
-      ></div>
+      ></section>
 
       {/* Right Column - Form Section */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
+      <section className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
         <div className="w-full max-w-md">
           <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-gray-800 text-center md:text-left">
             Log In
@@ -67,12 +67,18 @@ const LoginPage = () => {
           <Login />
           <div className="mt-4 text-center md:text-left">
             <p>
-              Don&apos;t have an account? <Link href="/signup">Sign up</Link>
+              Don&apos;t have an account?{" "}
+              <Link
+                href="/signup"
+                className="mt-2 text-blue-600 hover:text-blue-800 transition duration-300 font-medium"
+              >
+                Sign up
+              </Link>
             </p>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 

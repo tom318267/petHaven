@@ -101,7 +101,7 @@ const ProductSuggestions = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-12 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+      className="pb-12 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
     >
       <div className="container mx-auto px-4">
         <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">
@@ -148,7 +148,7 @@ const ProductSuggestions = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
+                  className="bg-[#E65000] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#CC4700] transition shadow-md"
                   onClick={() => handleAddToCart(product)}
                 >
                   Add To Cart

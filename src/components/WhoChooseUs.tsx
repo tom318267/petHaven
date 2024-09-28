@@ -3,7 +3,7 @@ import { FaTruck, FaSeedling, FaHeadset } from "react-icons/fa";
 
 const WhyChooseUs = () => {
   return (
-    <div className="py-16 bg-white">
+    <div className="py-12 bg-white">
       <div className="container mx-auto px-4">
         {/* Title Section */}
         <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">

@@ -52,13 +52,29 @@ const Header = () => {
         </div>
 
         {/* Hamburger Menu Button (visible on mobile) */}
-        <button
-          className="md:hidden text-gray-700 focus:outline-none"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
+        <div className="md:hidden flex items-center space-x-4">
+          <Link
+            href="/cart"
+            className="p-3 text-[#E65000] hover:text-[#CC4700] transition-colors"
+            aria-label="Shopping Cart"
+          >
+            <div className="relative">
+              <FaShoppingCart size={24} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-3 -right-3 bg-[#E65000] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItemCount}
+                </span>
+              )}
+            </div>
+          </Link>
+          <button
+            className="text-[#E65000] focus:outline-none"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
 
         {/* Navigation Links and Auth Buttons */}
         <div
@@ -69,31 +85,31 @@ const Header = () => {
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-12 p-4 md:p-0">
             <Link
               href="/"
-              className="hover:text-black relative group font-medium text-lg"
+              className="font-medium text-lg hover:text-black relative group"
             >
               Home
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
             <Link
               href="/products"
-              className="hover:text-black relative group font-medium text-lg"
+              className="font-medium text-lg hover:text-black relative group"
             >
               Products
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
             <Link
               href="/blogs"
-              className="hover:text-black relative group font-medium text-lg"
+              className="font-medium text-lg hover:text-black relative group"
             >
               Blogs
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
             <Link
               href="/contact"
-              className="hover:text-black relative group font-medium text-lg"
+              className="font-medium text-lg hover:text-black relative group"
             >
               Contact
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 origin-center group-hover:scale-x-100 hidden md:block"></span>
             </Link>
 
             {/* Auth Buttons - now part of the mobile menu */}
@@ -112,13 +128,13 @@ const Header = () => {
               <div className="md:hidden space-y-2">
                 <Link
                   href="/login"
-                  className="block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out text-lg font-medium"
+                  className="block px-4 py-2 bg-[#E65000] text-white rounded-lg hover:bg-[#CC4700] transition duration-300 ease-in-out text-lg font-medium"
                 >
                   Log In
                 </Link>
                 <Link
                   href="/signup"
-                  className="block px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-100 transition duration-300 ease-in-out text-lg font-medium"
+                  className="block px-4 py-2 border border-[#E65000] text-[#E65000] rounded-lg hover:bg-[#FFDACC] transition duration-300 ease-in-out text-lg font-medium"
                 >
                   Sign Up
                 </Link>
@@ -131,13 +147,13 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <Link
             href="/cart"
-            className="p-3 text-blue-600 hover:text-blue-800 transition-colors"
+            className="p-3 text-[#E65000] hover:text-[#CC4700] transition-colors"
             aria-label="Shopping Cart"
           >
             <div className="relative">
               <FaShoppingCart size={24} />
               {cartItemCount > 0 && (
-                <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                <span className="absolute -top-3 -right-3 bg-[#E65000] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   {cartItemCount}
                 </span>
               )}
@@ -159,13 +175,13 @@ const Header = () => {
             <>
               <Link
                 href="/login"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out text-base font-medium"
+                className="px-4 py-2 bg-[#E65000] text-white rounded-lg hover:bg-[#CC4700] transition duration-300 ease-in-out text-base font-medium"
               >
                 Log In
               </Link>
               <Link
                 href="/signup"
-                className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-100 transition duration-300 ease-in-out text-base font-medium"
+                className="px-4 py-2 border border-[#E65000] text-[#E65000] rounded-lg hover:bg-[#FFDACC] transition duration-300 ease-in-out text-base font-medium"
               >
                 Sign Up
               </Link>

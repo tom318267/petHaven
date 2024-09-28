@@ -28,7 +28,7 @@ const ServiceCard = ({ icon, title, description, link }: ServiceCardProps) => {
 // Main component to render the services
 const ServicesSection = () => {
   return (
-    <div className="py-12 bg-gray-100">
+    <div className="py-6 bg-gray-100">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ServiceCard

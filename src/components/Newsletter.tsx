@@ -1,6 +1,5 @@
 const Newsletter = () => {
   return (
-    // Added shadow-lg and adjusted padding
     <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-24 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
