@@ -5,7 +5,7 @@ import { Urbanist } from "next/font/google";
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/router";
 import Testimonials from "@/components/Testimonials";
-import WhyChooseUs from "@/components/WhoChooseUs";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import { useInView } from "react-intersection-observer";
 import Newsletter from "@/components/Newsletter";
 import { FaDog, FaCat, FaPaw, FaEnvelope } from "react-icons/fa";
@@ -111,14 +111,14 @@ const Home = (): JSX.Element => {
           <div className="relative z-10 container mx-auto px-4 py-16 h-full flex items-center">
             <div className="flex items-center justify-between gap-24">
               <motion.div
-                className="flex flex-col space-y-4 lg:w-1/2"
+                className="flex flex-col space-y-4 lg:w-1/2 sm:pt-0 pt-20"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
                 <motion.h1
                   variants={itemVariants}
-                  className="text-[60px] font-extrabold text-[#07090D] leading-tight"
+                  className="text-[48px] sm:text-[60px] font-extrabold text-[#07090D] leading-tight"
                 >
                   Everything Your Pet Needs, All in One Place
                 </motion.h1>

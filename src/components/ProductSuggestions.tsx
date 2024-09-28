@@ -108,7 +108,7 @@ const ProductSuggestions = () => {
       className="pb-12 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           Our Featured Products
         </h2>
         <p className="text-lg text-[#1A1A1A] text-center mb-12 max-w-5xl mx-auto">
@@ -136,7 +136,7 @@ const ProductSuggestions = () => {
 
               {/* Product Info */}
               <div className="mt-4 text-center flex-grow">
-                <h2 className="text-2xl font-semibold text-gray-800">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
                   {product.name}
                 </h2>
                 <p className="text-gray-600 mt-2">

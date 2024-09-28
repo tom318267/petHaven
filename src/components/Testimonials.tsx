@@ -39,7 +39,7 @@ const TestimonialsSection = () => {
   return (
     <div className="py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           We love hearing from our customers
         </h2>
         <p className="text-lg text-[#1A1A1A] text-center mb-12 max-w-5xl mx-auto">

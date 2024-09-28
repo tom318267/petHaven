@@ -6,7 +6,7 @@ const WhyChooseUs = () => {
     <div className="py-12 bg-white">
       <div className="container mx-auto px-4">
         {/* Title Section */}
-        <h2 className="text-5xl font-extrabold text-[#2463EB] text-center mb-8">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           Why Choose <span className="text-blue-600">Pet Haven?</span>
         </h2>
         <p className="text-lg text-[#1A1A1A] text-center mb-12 max-w-5xl mx-auto">
