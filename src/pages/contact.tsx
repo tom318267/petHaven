@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -26,21 +27,57 @@ const ContactPage = () => {
       });
 
       if (response.ok) {
-        alert("Message sent successfully!");
+        toast.success("Message sent successfully!", {
+          style: {
+            background: "#3b82f6",
+            color: "#ffffff",
+          },
+          iconTheme: {
+            primary: "#ffffff",
+            secondary: "#3b82f6",
+          },
+        });
         setFormData({ name: "", email: "", message: "" }); // Reset form
       } else {
-        alert("Failed to send message. Please try again.");
+        toast.error("Failed to send message. Please try again.", {
+          style: {
+            background: "#3b82f6",
+            color: "#ffffff",
+          },
+          iconTheme: {
+            primary: "#ffffff",
+            secondary: "#3b82f6",
+          },
+        });
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.", {
+        style: {
+          background: "#3b82f6",
+          color: "#ffffff",
+        },
+        iconTheme: {
+          primary: "#ffffff",
+          secondary: "#3b82f6",
+        },
+      });
     }
   };
 
   return (
     <div className="bg-[#E5F5FF] min-h-screen py-16">
-      {" "}
-      {/* Updated background color */}
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 5000,
+          style: {
+            background: "#3b82f6",
+            color: "#ffffff",
+          },
+        }}
+      />
       <div className="container mx-auto px-4">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}

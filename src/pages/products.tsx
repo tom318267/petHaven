@@ -150,8 +150,12 @@ const ProductsPage = () => {
   const toastOptions: ToastOptions = {
     duration: 3000,
     style: {
-      background: "#2463EB", // Green background
-      color: "#ffffff", // White text
+      background: "#2463EB",
+      color: "#ffffff",
+    },
+    iconTheme: {
+      primary: "#ffffff",
+      secondary: "#2463EB",
     },
   };
 

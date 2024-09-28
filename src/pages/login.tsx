@@ -39,6 +39,10 @@ const LoginPage = () => {
           background: "#2463EB",
           color: "#ffffff",
         },
+        iconTheme: {
+          primary: "#ffffff",
+          secondary: "#2463EB",
+        },
       });
 
       // Delay the redirection

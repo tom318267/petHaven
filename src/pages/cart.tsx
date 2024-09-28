@@ -70,28 +70,32 @@ const CartPage: React.FC = () => {
       duration: 3000,
       position: "bottom-right",
       style: {
-        background: "#2463EB", // Blue background
-        color: "#ffffff", // White text
+        background: "#2463EB",
+        color: "#ffffff",
+      },
+      iconTheme: {
+        primary: "#ffffff",
+        secondary: "#2463EB",
       },
     });
   };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow container mx-auto px-4 py-8 sm:py-24 flex flex-col">
+      <div className="flex-grow container mx-auto px-4 py-8 sm:py-12 flex flex-col">
         <h1 className="text-3xl sm:text-5xl font-extrabold text-center mb-6">
           Your Cart
         </h1>
         {cartItems.length === 0 ? (
-          <div className="flex-grow flex flex-col items-center justify-center">
+          <div className="flex-grow flex flex-col items-center justify-start pt-4 sm:pt-8">
             <Image
               src="/images/dog.png"
               alt="Sad dog - Empty cart"
-              width={200}
-              height={200}
-              className="mb-8 object-contain pb-6"
+              width={150}
+              height={150}
+              className="mb-2 sm:mb-4 object-contain w-[80px] h-[80px] sm:w-[120px] sm:h-[120px]"
             />
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600 text-center">
               Your cart is empty. Let&apos;s find something special for your
               pet!
             </p>
@@ -114,7 +118,7 @@ const CartPage: React.FC = () => {
                     {cartItems.map((item) => (
                       <tr
                         key={item.id}
-                        className="block sm:table-row border-b border-gray-200 sm:border-b"
+                        className="block sm:table-row border-b sm:border-b-0"
                       >
                         <td className="p-4 sm:p-4 flex flex-col sm:table-cell sm:align-middle">
                           <div className="flex items-center justify-between mb-2 sm:mb-0">

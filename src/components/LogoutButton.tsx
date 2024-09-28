@@ -30,6 +30,10 @@ const LogoutButton = () => {
           background: "#2463EB",
           color: "#ffffff",
         },
+        iconTheme: {
+          primary: "#ffffff",
+          secondary: "#2463EB",
+        },
       });
     } catch (error) {
       console.error("Error signing out: ", error);

@@ -37,8 +37,12 @@ const SignupPage = () => {
         duration: 3000,
         position: "bottom-right",
         style: {
-          background: "#2463EB", // Blue background
-          color: "#ffffff", // White text
+          background: "#2463EB",
+          color: "#ffffff",
+        },
+        iconTheme: {
+          primary: "#ffffff",
+          secondary: "#2463EB",
         },
       });
 
