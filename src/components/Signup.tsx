@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 
@@ -15,17 +16,44 @@ const Signup = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      setError("Failed to create an account. Please try again.");
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        setError(
+          "This email is already registered. Please use a different email or try logging in."
+        );
+      } else {
+        setError("Failed to create an account. Please try again.");
+      }
     }
   };
 
   const handleGoogleSignUp = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      setError("Failed to sign up with Google.");
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Check if the user already exists
+      const signInMethods = await fetchSignInMethodsForEmail(auth, user.email!);
+
+      if (signInMethods.length > 0) {
+        // User already exists
+        setError(
+          "This Google account is already registered. You've been signed in."
+        );
+      } else {
+        // New user
+        setError(""); // Clear any existing errors
+        // You can add additional logic here for new user sign-ups if needed
+      }
+    } catch (error: any) {
+      if (error.code === "auth/account-exists-with-different-credential") {
+        setError(
+          "An account already exists with the same email address but different sign-in credentials. Try signing in with a different method."
+        );
+      } else {
+        setError("Failed to sign up with Google. Please try again.");
+      }
     }
   };
 
