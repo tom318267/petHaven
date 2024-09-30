@@ -67,7 +67,7 @@ const LoginPage = () => {
       ></section>
 
       {/* Right Column - Form Section */}
-      <section className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-20 md:mt-0">
+      <section className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-12 md:mt-0">
         <div className="w-full max-w-md">
           <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-gray-800 text-center md:text-left">
             Log In
