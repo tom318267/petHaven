@@ -19,7 +19,19 @@ const LoginPage = () => {
     toast.dismiss();
 
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      dispatch(setUser(authUser));
+      if (authUser) {
+        // Dispatch only serializable user data
+        dispatch(
+          setUser({
+            uid: authUser.uid,
+            email: authUser.email,
+            displayName: authUser.displayName,
+            photoURL: authUser.photoURL,
+          })
+        );
+      } else {
+        dispatch(setUser(null)); // Clear user state if not logged in
+      }
     });
 
     // Set up a route change start listener

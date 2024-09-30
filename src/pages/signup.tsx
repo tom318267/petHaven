@@ -16,13 +16,24 @@ const SignupPage = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      dispatch(setUser(authUser));
-      setLoading(false);
-
       if (authUser) {
+        // Dispatch only serializable user data
+        dispatch(
+          setUser({
+            uid: authUser.uid,
+            email: authUser.email,
+            displayName: authUser.displayName,
+            photoURL: authUser.photoURL,
+          })
+        );
+
+        // Prevent access to the signup page if already logged in
         toast.error("You're already signed in!", toastOptions);
-        router.push("/");
+        router.push("/"); // Redirect to homepage
+      } else {
+        dispatch(setUser(null)); // Clear the user from state
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
