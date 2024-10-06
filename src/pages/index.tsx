@@ -162,8 +162,8 @@ const Home = (): JSX.Element => {
                 <Image
                   src="/images/dogblob.png"
                   alt="Dog with Blob"
-                  width={500}
-                  height={500}
+                  width={800}
+                  height={800}
                   quality={100}
                   className="ml-auto"
                 />
