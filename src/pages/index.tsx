@@ -8,7 +8,6 @@ import Testimonials from "@/components/Testimonials";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { useInView } from "react-intersection-observer";
 import Newsletter from "@/components/Newsletter";
-import { FaDog, FaCat, FaPaw, FaEnvelope } from "react-icons/fa";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -173,7 +172,7 @@ const Home = (): JSX.Element => {
         </section>
 
         {/* Content sections */}
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-0">
           <div className="flex flex-col space-y-16 mb-16">
             <motion.section
               ref={productRef}
@@ -207,7 +206,7 @@ const Home = (): JSX.Element => {
               initial="hidden"
               animate={newsletterControls}
               variants={scrollVariants}
-              className="bg-white rounded-lg"
+              className="bg-white rounded-lg px-4 sm:px-0"
             >
               <Newsletter />
             </motion.section>

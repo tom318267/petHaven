@@ -1,7 +1,7 @@
 const Newsletter = () => {
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-24 shadow-lg">
-      <div className="container mx-auto px-4">
+    <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-24 shadow-lg rounded-lg">
+      <div className="container mx-auto px-4 sm:px-0">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">
             Stay Connected with Pet Haven

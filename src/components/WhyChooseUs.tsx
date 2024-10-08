@@ -4,7 +4,7 @@ import { FaTruck, FaSeedling, FaHeadset } from "react-icons/fa";
 const WhyChooseUs = () => {
   return (
     <div className="py-12 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-0">
         {/* Title Section */}
         <h2 className="text-4xl sm:text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           Why Choose <span className="text-blue-600">Pet Haven?</span>

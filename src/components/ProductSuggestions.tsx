@@ -115,7 +115,7 @@ const ProductSuggestions = () => {
       ref={sectionRef}
       className="pb-12 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-0">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-[#2463EB] text-center mb-8">
           Our Featured Products
         </h2>
@@ -130,7 +130,7 @@ const ProductSuggestions = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-blue-100 p-6 rounded-xl max-w-sm mx-auto flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-blue-100 p-6 rounded-xl mx-auto flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Image */}
               <div className="flex justify-center flex-shrink-0">
