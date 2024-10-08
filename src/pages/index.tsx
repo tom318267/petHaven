@@ -107,7 +107,7 @@ const Home = (): JSX.Element => {
               className="z-0 w-full h-full"
             />
           </div>
-          <div className="relative z-10 container mx-auto px-4 py-16 h-full flex items-center">
+          <div className="relative z-10 container mx-auto py-16 h-full flex items-center">
             <div className="flex items-center justify-between gap-24">
               <motion.div
                 className="flex flex-col space-y-4 lg:w-1/2 sm:pt-0 pt-20"
