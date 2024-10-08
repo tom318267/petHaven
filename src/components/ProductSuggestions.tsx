@@ -113,7 +113,7 @@ const ProductSuggestions = () => {
   return (
     <section
       ref={sectionRef}
-      className="pb-12 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+      className="opacity-0 translate-y-10 transition-all duration-1000 ease-out"
     >
       <div className="container mx-auto px-4 sm:px-0">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-[#2463EB] text-center mb-8">
