@@ -45,7 +45,7 @@ const Header = () => {
         isHomePage ? "" : "shadow-sm"
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center px-4 sm:px-0">
         {/* Logo Section */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
