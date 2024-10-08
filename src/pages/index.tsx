@@ -110,7 +110,7 @@ const Home = (): JSX.Element => {
           <div className="relative z-10 container mx-auto py-16 h-full flex items-center">
             <div className="flex items-center justify-between gap-24">
               <motion.div
-                className="flex flex-col space-y-4 lg:w-1/2 sm:pt-0 pt-20"
+                className="flex flex-col space-y-4 lg:w-1/2 px-6 sm:px-0 sm:pt-0 pt-20"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
