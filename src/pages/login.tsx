@@ -8,6 +8,7 @@ import { auth } from "../firebase/config";
 import Login from "../components/Login";
 import { toast } from "react-hot-toast";
 import { toastOptions } from "../components/GlobalToaster";
+import Image from "next/image";
 
 const LoginPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -73,10 +74,15 @@ const LoginPage = () => {
   return (
     <section className="min-h-screen flex flex-col md:flex-row">
       {/* Left Column - Image Background (hidden on mobile) */}
-      <section
-        className="hidden md:block w-full md:w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/dogbeach.jpg')" }}
-      ></section>
+      <section className="hidden md:block w-full md:w-1/2 relative">
+        <Image
+          src="/images/dogbeach.jpg"
+          alt="Dog on the beach"
+          layout="fill"
+          objectFit="cover"
+          priority
+        />
+      </section>
 
       {/* Right Column - Form Section */}
       <section className="w-full md:w-1/2 flex items-center justify-center p-8 md:p-12 mt-12 md:mt-0">

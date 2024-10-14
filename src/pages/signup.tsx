@@ -8,13 +8,18 @@ import Signup from "../components/Signup";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { toastOptions } from "../components/GlobalToaster";
+import { RootState } from "../store";
 
 const SignupPage = () => {
+  const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Clear any existing toasts when the signup page loads
+    toast.dismiss();
+
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // Dispatch only serializable user data
@@ -26,22 +31,11 @@ const SignupPage = () => {
             photoURL: authUser.photoURL,
           })
         );
-
-        // Prevent access to the signup page if already logged in
-        toast.error("You're already signed in!", toastOptions);
-        router.push("/"); // Redirect to homepage
       } else {
         dispatch(setUser(null)); // Clear the user from state
       }
       setLoading(false);
     });
-
-    return () => unsubscribe();
-  }, [dispatch, router]);
-
-  useEffect(() => {
-    // Clear any existing toasts when the signup page loads
-    toast.dismiss();
 
     // Set up a route change start listener
     const handleRouteChangeStart = () => {
@@ -53,11 +47,31 @@ const SignupPage = () => {
 
     // Clean up
     return () => {
+      unsubscribe();
       router.events.off("routeChangeStart", handleRouteChangeStart);
     };
-  }, [router]);
+  }, [dispatch, router]);
 
-  // ... rest of the component code ...
+  useEffect(() => {
+    if (user) {
+      const funMessages = [
+        "Welcome to the pack!",
+        "Meow-velous! You're all signed up!",
+        "Purr-fect! Your account is ready!",
+        "Fur-tastic! Let's get started!",
+      ];
+      const randomMessage =
+        funMessages[Math.floor(Math.random() * funMessages.length)];
+
+      // Show the toast immediately with green background
+      toast.success(randomMessage, toastOptions);
+
+      // Delay the redirection
+      setTimeout(() => {
+        router.push("/");
+      }, 2000); // Wait for 2 seconds before redirecting
+    }
+  }, [user, router]);
 
   if (loading) {
     return <div>Loading...</div>; // Or a more sophisticated loading component
@@ -95,6 +109,8 @@ const SignupPage = () => {
           alt="Signup cat background"
           layout="fill"
           objectFit="cover"
+          priority
+          quality={85}
         />
       </section>
     </section>
